@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoDI", "NanoDI\NanoDI.csproj", "{5F35E71C-7948-42A5-A5B1-07821FE089FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoDIExample", "NanoDIExample\NanoDIExample.csproj", "{FA8B7160-1801-41C3-AD5D-171579E7D91E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5F35E71C-7948-42A5-A5B1-07821FE089FD} = {5F35E71C-7948-42A5-A5B1-07821FE089FD}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F35E71C-7948-42A5-A5B1-07821FE089FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F35E71C-7948-42A5-A5B1-07821FE089FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F35E71C-7948-42A5-A5B1-07821FE089FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F35E71C-7948-42A5-A5B1-07821FE089FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
