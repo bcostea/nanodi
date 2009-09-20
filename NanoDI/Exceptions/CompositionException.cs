@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace NanoDI.Exceptions
 {
@@ -9,8 +10,27 @@ namespace NanoDI.Exceptions
      *   - problem adding a component
      */
 
-    class CompositionException : Exception
+    [Serializable]
+    public class CompositionException : Exception
     {
+        public CompositionException()
+        {
+
+        }
+        public CompositionException(string message)
+            : base(message)
+        {
+        }
+        public CompositionException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+
+        }
+        protected CompositionException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+
+        }
 
     }
 }

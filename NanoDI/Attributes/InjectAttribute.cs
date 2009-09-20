@@ -26,7 +26,7 @@ using System;
 namespace NanoDI.Attributes
 {
     [AttributeUsage(AttributeTargets.Field)]
-    public class Inject : Attribute
+    public sealed class InjectAttribute : Attribute
     {
     }
 }

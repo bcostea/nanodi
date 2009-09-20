@@ -38,13 +38,13 @@ namespace NanoDIExample
     {
         // this is how we inject another Component.
         [Inject]
-        IDependency dependencyOne;
+        IDependency dependencyOne = null;
         
         [Inject]
-        IDependency dependencyTwo;
+        IDependency dependencyTwo = null;
         
         [Inject]
-        IDependency dependencyThree;
+        IDependency dependencyThree = null;
 
         public void start()
         {

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5F35E71C-7948-42A5-A5B1-07821FE089FD}</ProjectGuid>
+    <ProjectGuid>{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NanoDI</RootNamespace>
-    <AssemblyName>NanoDI</AssemblyName>
+    <RootNamespace>NanoDIUnitTests</RootNamespace>
+    <AssemblyName>NanoDIUnitTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,26 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationContext.cs" />
-    
-    <Compile Include="Attributes\ComponentAttribute.cs" />
-    <Compile Include="Attributes\InjectAttribute.cs" />
-    <Compile Include="Attributes\Scope.cs" />
-    
-    <Compile Include="Container\IContainer.cs" />
-    <Compile Include="Container\IMutableContainer.cs" />
-    <Compile Include="Container\DefaultContainer.cs" />
-    
-    <Compile Include="Dependency\Dependency.cs" />
-    <Compile Include="Dependency\DependencyGraph.cs" />
-    <Compile Include="Dependency\DependencyManager.cs" />
-    
-    <Compile Include="Exceptions\CircularDependencyException.cs" />
-    <Compile Include="Exceptions\ComponentAlreadyExistsException.cs" />
-    <Compile Include="Exceptions\CompositionException.cs" />
-    <Compile Include="Exceptions\InvalidComponentException.cs" />
-
+    <Compile Include="ApplicationContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Container\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

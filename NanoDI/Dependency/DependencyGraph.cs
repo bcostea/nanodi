@@ -30,29 +30,14 @@ namespace NanoDI.Dependency
 {
     class DependencyGraph
     {
-        Boolean[,] dependencies;
+        Boolean[][] dependencies;
         Dictionary<string, int> componentIndex = new Dictionary<string, int>();
         int lastDependencyIndex=0;
         int DependencyCount=0;
 
         public DependencyGraph(int components)
         {
-            dependencies = new Boolean[255, 255];
-        }
-
-        int getOrCreateIndex(string componentName)
-        {
-            int index;
-            if (!componentIndex.ContainsKey(componentName))
-            {
-                index = lastDependencyIndex++;
-                componentIndex.Add(componentName, index);
-            }
-            else
-            {
-                index = componentIndex[componentName];
-            }
-            return index;
+            dependencies = new Boolean[components][];
         }
 
         public void insertDependency(Dependency dependency)
@@ -60,40 +45,30 @@ namespace NanoDI.Dependency
             int dependentIndex = getOrCreateIndex(dependency.dependent);
             int dependencyIndex = getOrCreateIndex(dependency.dependency);
 
-            if (dependencies[dependencyIndex, dependentIndex])
+            Console.WriteLine("Inserting dep: " + dependency.dependent + " : " + dependency.dependency);
+
+            if (dependencies[dependentIndex] == null)
+                dependencies[dependentIndex] = new Boolean[dependencies.Length];
+            if(dependencies[dependencyIndex] == null)
+                dependencies[dependencyIndex] = new Boolean[dependencies.Length];
+
+            if (dependencies[dependencyIndex][dependentIndex])
             {
                 throw new CircularDependencyException(dependency.dependent + "," + dependency.dependency);
             }
             else
             {
-                if (dependencies[dependentIndex, dependencyIndex] == false)
+                if (dependencies[dependentIndex][dependencyIndex] == false)
                 {
                     DependencyCount++;
-                    dependencies[dependentIndex, dependencyIndex] = true;
+                    dependencies[dependentIndex][dependencyIndex] = true;
                 }
             }
         }
 
-        public void removeDependency(Dependency dependency)
-        {
-            int dependentIndex = getOrCreateIndex(dependency.dependent);
-            int dependencyIndex = getOrCreateIndex(dependency.dependency);
-
-            if (dependencies[dependentIndex, dependencyIndex] == true)
-            {
-                DependencyCount--;
-                dependencies[dependentIndex, dependencyIndex] = false;
-            }
-        }
-
-        Boolean dependencyTest(string dependent, string dependency)
-        {
-            return dependencyTest(getOrCreateIndex(dependent), getOrCreateIndex(dependency));
-        }
-
         Boolean dependencyTest(int dependentIndex, int dependencyIndex)
         {
-            return dependencies[dependentIndex, dependencyIndex];
+            return dependencies[dependentIndex][dependencyIndex];
         }
 
         public List<string> getDependencies(string componentName)
@@ -115,6 +90,21 @@ namespace NanoDI.Dependency
             }
 
             return dependencies;
+        }
+
+        int getOrCreateIndex(string componentName)
+        {
+            int index;
+            if (!componentIndex.ContainsKey(componentName))
+            {
+                index = lastDependencyIndex++;
+                componentIndex.Add(componentName, index);
+            }
+            else
+            {
+                index = componentIndex[componentName];
+            }
+            return index;
         }
 
     }

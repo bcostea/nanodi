@@ -33,7 +33,6 @@ namespace NanoDI.Container
 {
     class DefaultContainer : IMutableContainer
     {
-        Dictionary<string, string> properties = new Dictionary<string, string>();
         Dictionary<string, object> components = new Dictionary<string, object>();
         DependencyManager dependencyManager = new DependencyManager();
             
