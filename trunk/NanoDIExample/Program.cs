@@ -31,10 +31,8 @@ namespace NanoDIExample
     {
         static void Main(string[] args)
         {
-            IMainComponent mainComponent = (IMainComponent) ApplicationContext.getComponent("mainComponent");
-
+            IMainComponent mainComponent = (IMainComponent) ApplicationContext.GetComponent("mainComponent");
             mainComponent.start();
-
             Console.ReadLine();
         }
     }

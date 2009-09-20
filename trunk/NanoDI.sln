@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoDIExample", "NanoDIExam
 		{5F35E71C-7948-42A5-A5B1-07821FE089FD} = {5F35E71C-7948-42A5-A5B1-07821FE089FD}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NanoDIUnitTests", "NanoDIUnitTests\NanoDIUnitTests.csproj", "{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA8B7160-1801-41C3-AD5D-171579E7D91E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

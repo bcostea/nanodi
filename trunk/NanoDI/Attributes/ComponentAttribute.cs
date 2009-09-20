@@ -26,14 +26,16 @@ using System;
 namespace NanoDI.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class Component : Attribute
+    public sealed class ComponentAttribute : Attribute
     {
         string name;
         Scope scope;
 
-        public Component(string name) { this.name = name; this.scope = Scope.SINGLETON; }
-        public Component(string name, Scope scope) { this.name = name; this.scope = scope; }
+        public ComponentAttribute(string name) { this.name = name; this.scope = Scope.Singleton; }
+        public ComponentAttribute(string name, Scope scope) { this.name = name; this.scope = scope; }
         
         public string Name { get { return name; } }
+        public Scope Scope { get { return scope; } }
+
     }
 }

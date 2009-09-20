@@ -27,7 +27,8 @@ namespace NanoDI.Attributes
 {
     public enum Scope
     {
-        SINGLETON = 1,
-        PROTOTYPE=2
+        None = 0,
+        Singleton = 1,
+        Prototype = 2
     }
 }

@@ -27,13 +27,13 @@ using NanoDI;
 using NanoDI.Exceptions;
 using NanoDI.Container;
 
+[assembly: CLSCompliant(true)]
 namespace NanoDI
 {
-
-    public class ApplicationContext
+    public sealed class ApplicationContext
     {
         private static IMutableContainer container = new DefaultContainer();
-     
+
         #region Singleton
 
         private static readonly ApplicationContext instance = new ApplicationContext();
@@ -45,8 +45,8 @@ namespace NanoDI
                 return instance;
             }
         }
-        
-        public ApplicationContext()
+
+        ApplicationContext()
         {
             container.initialize();
         }
@@ -55,8 +55,8 @@ namespace NanoDI
 
 
         #region component accessors
-        
-        public static object getComponent(string componentName)
+
+        public static object GetComponent(string componentName)
         {
             return container.getComponent(componentName);
         }

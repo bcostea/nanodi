@@ -36,7 +36,7 @@ namespace NanoDI.Dependency
         Dictionary<string, string> componentTypes = new Dictionary<string, string>();
         DependencyGraph dependencyGraph;
 
-        public Dictionary<string, string> DeclaredComponents{get{return componentTypes;}}
+        public Dictionary<string, string> DeclaredComponents{get{return this.componentTypes;}}
 
         public void buildDependencyGraph()
         {
@@ -48,7 +48,7 @@ namespace NanoDI.Dependency
                 {
                     foreach (Attribute attr in fieldInfo.GetCustomAttributes(true))
                     {
-                        Inject inject = attr as Inject;
+                        InjectAttribute inject = attr as InjectAttribute;
                         if (inject != null)
                         {
                             foreach (string fullClassName in componentTypes.Values)
@@ -79,7 +79,7 @@ namespace NanoDI.Dependency
             {
                 foreach (Attribute attr in type.GetCustomAttributes(true))
                 {
-                    Component component = attr as Component;
+                    ComponentAttribute component = attr as ComponentAttribute;
                     if (component != null)
                     {
                         componentTypes.Add(component.Name, type.AssemblyQualifiedName);
@@ -89,7 +89,7 @@ namespace NanoDI.Dependency
             dependencyGraph = new DependencyGraph(componentTypes.Count);
         }
 
-        private Type[] getImplementedInterfaces(string componentFullClassName)
+        private static Type[] getImplementedInterfaces(string componentFullClassName)
         {
             Type componentType = Type.GetType(componentFullClassName);
             return componentType.GetInterfaces();
