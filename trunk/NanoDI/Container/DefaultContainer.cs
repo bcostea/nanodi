@@ -34,6 +34,7 @@ using NanoDI.Component.Locator;
 using NanoDI.Component.Registry;
 using NanoDI.Component.Dependency;
 using NanoDI.Exceptions;
+using NanoDI.Component.Cache;
 
 namespace NanoDI.Container
 {
@@ -43,12 +44,15 @@ namespace NanoDI.Container
         IComponentRegistry componentRegistry;
         ILocator componentLocator;
         IComponentActivator componentActivator;
+        IComponentCache componentCache;
 
-        public DefaultContainer(IComponentRegistry componentRegistry, ILocator componentLocator, IComponentActivator componentActivator)
+        public DefaultContainer()
         {
-            this.componentRegistry = componentRegistry;
-            this.componentLocator = componentLocator;
-            this.componentActivator = componentActivator;
+            
+                this.componentRegistry = new DefaultComponentRegistry();
+                this.componentCache = new DefaultComponentCache();
+                this.componentLocator = new ReflectionLocator(); 
+                this.componentActivator = new DefaultComponentActivator(this.componentRegistry, this.componentCache);
         }
 
         public void Initialize()

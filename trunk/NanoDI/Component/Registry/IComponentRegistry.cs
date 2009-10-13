@@ -11,7 +11,10 @@ namespace NanoDI.Component.Registry
         Boolean Contains(string componentName);
         IComponent Get(string componentName);
         Type GetType(string componentName);
+        void Put(IComponent component);
         
         void RegisterAll(List<IComponent> components);
+
+        List<IComponent> getComponentDependencies(IComponent component);
     }
 }

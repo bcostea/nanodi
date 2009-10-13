@@ -35,7 +35,7 @@ namespace NanoDI
 {
     public sealed class ApplicationContext
     {
-    	private static IMutableContainer container = new DefaultContainer(new DefaultComponentRegistry(), new ReflectionLocator(), new DefaultComponentActivator());
+    	private static IMutableContainer container = new DefaultContainer();
 
         #region Singleton
 

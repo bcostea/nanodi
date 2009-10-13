@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NanoDI.UnitTests
+namespace NanoDIUnitTests.Component.Cache
 {
-    public class ApplicationContextTests
+    class DefaultComponentCacheTest
     {
 
     }
