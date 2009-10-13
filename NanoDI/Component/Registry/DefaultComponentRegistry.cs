@@ -1,4 +1,27 @@
-﻿using System;
+﻿#region Copyright 2009 Bogdan COSTEA
+/** This File is part of the NanoDI Library
+ *
+ * Copyright 2009 Bogdan COSTEA
+ * All rights reserved
+ * 
+ * This library is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; if not, write to the
+ * Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor Boston, MA  02110-1301 USA
+ */
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,13 +36,7 @@ namespace NanoDI.Component.Registry
     class DefaultComponentRegistry : IComponentRegistry
     {
         Dictionary<string, IComponent> components = new Dictionary<string, IComponent>();
-        //Dictionary<string, Type> componentTypes = new Dictionary<string, Type>();
         DependencyGraph dependencyGraph;
-
-        public List<string> ComponentNames 
-        {
-            get{ return new List<String>(components.Keys); }
-        }
 
         public void RegisterAll(List<IComponent> components)
         {
@@ -28,30 +45,22 @@ namespace NanoDI.Component.Registry
         	
         	foreach(IComponent component in components)
         	{
-        		this.components.Add(component.Name, component);
+                addComponent(component.Name, component);
+                
+                foreach (FieldInfo fieldInfo in component.Type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
+                {
+                    addComponentDependencyIfInjectable(component, fieldInfo);
+                }
         	}
-            
-            buildDependencyGraph();
         }
 
 
-        public void addComponent(string name, IComponent component)
+        void addComponent(string name, IComponent component)
         {
             if (!components.ContainsKey(name))
                 components.Add(name, component);
             else
                 throw new ComponentAlreadyExistsException(name);
-        }
-
-        void buildDependencyGraph()
-        {
-            foreach (IComponent component in components.Values)
-            {
-                foreach (FieldInfo fieldInfo in component.Type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
-                {
-                    addComponentDependencyIfInjectable(component, fieldInfo);
-                }
-            }
         }
 
         void addComponentDependencyIfInjectable(IComponent parentComponent, FieldInfo fieldInfo)
@@ -73,21 +82,7 @@ namespace NanoDI.Component.Registry
             }
         }
 
-        public void Put(IComponent component)
-        {
-            if (!Contains(component.Name))
-            {
-                components.Add(component.Name, component);
-            }
-            else if (Contains(component.Name) && Scope.Singleton.Equals(component.Scope))
-            {
-                throw new CompositionException();
-            }
-
-
-        }
-
-        public List<IComponent> getComponentDependencies(IComponent component)
+        public List<IComponent> GetComponentDependencies(IComponent component)
         {
             List<IComponent> dependencies = new List<IComponent>();
             List<string> stringDependencies = dependencyGraph.getDependencies(component.Name);
@@ -111,14 +106,6 @@ namespace NanoDI.Component.Registry
             return componentType.GetInterfaces();
         }
 
-
-    	
-		public List<IComponent> Components {
-			get {
-				throw new NotImplementedException();
-			}
-		}
-    	
 		public bool Contains(string componentName)
 		{
 			return components.ContainsKey(componentName);
