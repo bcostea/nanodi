@@ -69,7 +69,7 @@ namespace NanoDI.Component.ComponentActivator
 
             if (actualComponentType.AssemblyQualifiedName != null)
             {
-                List<IComponent> dependencies = componentRegistry.getComponentDependencies(component);
+                List<IComponent> dependencies = componentRegistry.GetComponentDependencies(component);
 
                 if (dependencies.Count > 0)
                 {
