@@ -23,18 +23,10 @@
 
 using System;
 
-namespace NanoDI.Dependency
+namespace NanoDI.Component.ComponentActivator
 {
-    class Dependency
-    {
-        public string dependent {get;set;}
-        public string dependency { get; set; }
-
-        public Dependency(string dependent, string dependency)
-        {
-            this.dependent = dependent;
-            this.dependency = dependency;
-        }
-
-    }
+	interface IComponentActivator
+	{
+		object GetInstance(IComponent component);
+	}
 }

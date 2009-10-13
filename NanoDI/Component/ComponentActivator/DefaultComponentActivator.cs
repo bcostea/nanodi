@@ -22,14 +22,25 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
+using NanoDI.Attributes;
 
-
-namespace NanoDI.Container
+namespace NanoDI.Component.ComponentActivator
 {
-    interface IContainer
-    {
-        void Initialize();
-        object GetComponent(string name);
-    }
+	class DefaultComponentActivator : IComponentActivator
+	{
+		public object GetInstance(IComponent component)
+		{
+			object componentInstance = null;
+			
+			if(component.Scope.Equals(Scope.Singleton))
+			{
+				Console.WriteLine("Singleton");
+			}
+			else
+			{
+				Console.WriteLine("Prototype");				
+			}
+			return componentInstance;
+		}
+	}
 }

@@ -26,43 +26,54 @@ using System.Collections.Generic;
 using System.Linq;
 using NanoDI.Exceptions;
 
-namespace NanoDI.Dependency
+namespace NanoDI.Component.Dependency
 {
     class DependencyGraph
     {
         Boolean[][] dependencies;
-        Dictionary<string, int> componentIndex = new Dictionary<string, int>();
+        Dictionary<string, int> components = new Dictionary<string, int>();
         int lastDependencyIndex=0;
-        int DependencyCount=0;
+        int dependencyCount = 0;
 
         public DependencyGraph(int components)
         {
             dependencies = new Boolean[components][];
         }
 
-        public void insertDependency(Dependency dependency)
+        public void insertDependency(String dependent, String dependency)
         {
-            int dependentIndex = getOrCreateIndex(dependency.dependent);
-            int dependencyIndex = getOrCreateIndex(dependency.dependency);
+            int dependentIndex = getOrCreateIndex(dependent);
+            int dependencyIndex = getOrCreateIndex(dependency);
 
-            Console.WriteLine("Inserting dep: " + dependency.dependent + " : " + dependency.dependency);
+            initDefaultDependency(dependentIndex);
+            initDefaultDependency(dependencyIndex);
 
-            if (dependencies[dependentIndex] == null)
-                dependencies[dependentIndex] = new Boolean[dependencies.Length];
-            if(dependencies[dependencyIndex] == null)
-                dependencies[dependencyIndex] = new Boolean[dependencies.Length];
+            validateNonCircularDependency(dependent, dependency);
+            
+            markAsDependent(dependentIndex, dependencyIndex);
+        }
+
+        void initDefaultDependency(int index){
+            if (dependencies[index] == null)
+                dependencies[index] = new Boolean[dependencies.Length];
+        }
+
+        void markAsDependent(int dependentIndex, int dependencyIndex){
+            if (dependencies[dependentIndex][dependencyIndex] == false)
+            {
+                dependencies[dependentIndex][dependencyIndex] = true;
+                dependencyCount++;
+            }
+        }
+
+        void validateNonCircularDependency(string dependent, string dependency)
+        {
+            int dependentIndex = getOrCreateIndex(dependent);
+            int dependencyIndex = getOrCreateIndex(dependency);
 
             if (dependencies[dependencyIndex][dependentIndex])
             {
-                throw new CircularDependencyException(dependency.dependent + "," + dependency.dependency);
-            }
-            else
-            {
-                if (dependencies[dependentIndex][dependencyIndex] == false)
-                {
-                    DependencyCount++;
-                    dependencies[dependentIndex][dependencyIndex] = true;
-                }
+                throw new CircularDependencyException(dependent + "," + dependency);
             }
         }
 
@@ -75,16 +86,16 @@ namespace NanoDI.Dependency
         {
             List<string> dependencies = new List<string>();
 
-            if (!componentIndex.ContainsKey(componentName))
+            if (!components.ContainsKey(componentName))
                 return dependencies;
 
-            int sourceComponentIdx = componentIndex[componentName];
+            int sourceComponentIdx = components[componentName];
             
-            for (int i = 0; i < DependencyCount + 1; i++)
+            for (int i = 0; i < dependencyCount + 1; i++)
             {
                 if (dependencyTest(sourceComponentIdx, i))
                 {
-                    var key = (from k in componentIndex where int.Equals(k.Value, i) select k.Key).FirstOrDefault();
+                    var key = (from k in components where int.Equals(k.Value, i) select k.Key).FirstOrDefault();
                     dependencies.Add(key);
                 }
             }
@@ -95,14 +106,14 @@ namespace NanoDI.Dependency
         int getOrCreateIndex(string componentName)
         {
             int index;
-            if (!componentIndex.ContainsKey(componentName))
+            if (!components.ContainsKey(componentName))
             {
                 index = lastDependencyIndex++;
-                componentIndex.Add(componentName, index);
+                components.Add(componentName, index);
             }
             else
             {
-                index = componentIndex[componentName];
+                index = components[componentName];
             }
             return index;
         }

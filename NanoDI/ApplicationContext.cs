@@ -24,15 +24,18 @@
 using System;
 using System.Reflection;
 using NanoDI;
-using NanoDI.Exceptions;
+using NanoDI.Component.ComponentActivator;
+using NanoDI.Component.Locator;
+using NanoDI.Component.Registry;
 using NanoDI.Container;
+using NanoDI.Exceptions;
 
 [assembly: CLSCompliant(true)]
 namespace NanoDI
 {
     public sealed class ApplicationContext
     {
-        private static IMutableContainer container = new DefaultContainer();
+    	private static IMutableContainer container = new DefaultContainer(new DefaultComponentRegistry(), new ReflectionLocator(), new DefaultComponentActivator());
 
         #region Singleton
 
@@ -48,7 +51,7 @@ namespace NanoDI
 
         ApplicationContext()
         {
-            container.initialize();
+            container.Initialize();
         }
 
         #endregion
@@ -58,7 +61,7 @@ namespace NanoDI
 
         public static object GetComponent(string componentName)
         {
-            return container.getComponent(componentName);
+            return container.GetComponent(componentName);
         }
 
         #endregion
