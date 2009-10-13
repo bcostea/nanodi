@@ -22,94 +22,55 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
+using NanoDI.Attributes;
+using NanoDI.Component;
+using NanoDI.Component.ComponentActivator;
+using NanoDI.Component.Locator;
+using NanoDI.Component.Registry;
+using NanoDI.Component.Dependency;
 using NanoDI.Exceptions;
-using NanoDI.Dependency;
 
 namespace NanoDI.Container
 {
     class DefaultContainer : IMutableContainer
     {
-        Dictionary<string, object> components = new Dictionary<string, object>();
-        DependencyManager dependencyManager = new DependencyManager();
-            
-        public void initialize()
+        
+        IComponentRegistry componentRegistry;
+        ILocator componentLocator;
+        IComponentActivator componentActivator;
+
+        public DefaultContainer(IComponentRegistry componentRegistry, ILocator componentLocator, IComponentActivator componentActivator)
         {
-            dependencyManager.buildDependencyGraph();
-            initializeComponents();
+            this.componentRegistry = componentRegistry;
+            this.componentLocator = componentLocator;
+            this.componentActivator = componentActivator;
         }
 
-        private void initializeComponents()
+        public void Initialize()
         {
-            Dictionary<string, string> declaredComponents = dependencyManager.DeclaredComponents;
-            foreach (string componentName in declaredComponents.Keys)
-            {
-                instantiateComponent(componentName);
-            }
+            componentRegistry.RegisterAll(componentLocator.Locate());
         }
 
-        // a little dirty, needs some refactoring and love
-        object instantiateComponent(string componentName)
+        public object GetComponent(string componentName)
         {
-            if (components.Keys.Contains(componentName) && components[componentName] != null)
-                return components[componentName];
-
-            Dictionary<string, string> declaredComponents = dependencyManager.DeclaredComponents;
-            string componentConcreteClassName = (string) declaredComponents[componentName];
-            Type actualComponentType = Type.GetType(componentConcreteClassName);
-            var actualComponent = Activator.CreateInstance(actualComponentType);
-
-            if (componentConcreteClassName != null)
+            if (componentRegistry.Contains(componentName))
             {
-                List<string> dependencies = dependencyManager.getDependencies(componentConcreteClassName);
+            	IComponent component = componentRegistry.Get(componentName);
+            	return componentActivator.GetInstance(component);
                 
-                if (dependencies.Count > 0)
-                {
-                    foreach (string dependency in dependencies)
-                    {
-                        string dependentComponentName = (from cmp in declaredComponents where int.Equals(cmp.Value, dependency) select cmp.Key).FirstOrDefault();
-                        FieldInfo fieldInfo = actualComponentType.GetField(dependentComponentName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
-                        if (fieldInfo != null)
-                        {
-                            object createdDependency = instantiateComponent(dependentComponentName);
-                            fieldInfo.SetValue(actualComponent, createdDependency);
-                        }
-                        else
-                            throw new CompositionException();
-                    }
-                }
-                components.Add(componentName, actualComponent);
-
-                return actualComponent;
             }
             else
                 throw new InvalidComponentException(componentName);
         }
-
-        public IMutableContainer addComponent(string name, object component){
-            if (!components.ContainsKey(name))
-                components.Add(name, component);
-            else
-                throw new ComponentAlreadyExistsException(name);
-
-            return this;
-        }
-
-        public object getComponent(string name)
-        {
-            if(components.ContainsKey(name))
-                return components[name];
-            else
-                throw new InvalidComponentException(name);
-        }
-
-        public List<object> getComponents()
-        {
-            return new List<object>();
-        }
-
+    	
+		public IMutableContainer AddComponent(string name, object component)
+		{
+			throw new NotImplementedException();
+		}
     }
 }
