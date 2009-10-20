@@ -25,13 +25,15 @@ using System;
 using System.Collections.Generic;
 using NanoDI.Attributes;
 using System.Reflection;
+using NanoDI.Tooling.Logging;
 
 namespace NanoDI.Component.Locator
 {
     class ReflectionLocator : ILocator
     {
+        ILogger log = LogFactory.GetLog(typeof(ReflectionLocator));
         Assembly asm = Assembly.GetEntryAssembly();
-
+            
         public List<IComponent> Locate()
         {
             return LocateInNamespace(asm.EntryPoint.DeclaringType.Namespace);
@@ -40,6 +42,7 @@ namespace NanoDI.Component.Locator
         public List<IComponent> LocateInNamespace(string namespaceName)
         {
             List<IComponent> components = new List<IComponent>();
+
             foreach (Type type in asm.GetTypes())
             {
                 foreach (Attribute attr in type.GetCustomAttributes(true))
@@ -47,7 +50,10 @@ namespace NanoDI.Component.Locator
                     ComponentAttribute component = attr as ComponentAttribute;
                     if (component != null)
                     {
+                        if (log.IsDebugEnabled())
+                            log.Debug("Component located " + component.Name);
                         components.Add(new Component(component.Name, type, component.Scope));
+
                     }
                 }
             }

@@ -32,8 +32,8 @@ namespace NanoDI.Component.Dependency
     {
         Boolean[][] dependencies;
         Dictionary<string, int> components = new Dictionary<string, int>();
-        int lastDependencyIndex=0;
-        int dependencyCount = 0;
+        int lastDependencyIndex;
+        int dependencyCount;
 
         public DependencyGraph(int components)
         {
@@ -82,12 +82,12 @@ namespace NanoDI.Component.Dependency
             return dependencies[dependentIndex][dependencyIndex];
         }
 
-        public List<string> getDependencies(string componentName)
+        public List<string> GetDependencies(string componentName)
         {
-            List<string> dependencies = new List<string>();
+            List<string> deps = new List<string>();
 
             if (!components.ContainsKey(componentName))
-                return dependencies;
+                return deps;
 
             int sourceComponentIdx = components[componentName];
             
@@ -96,11 +96,11 @@ namespace NanoDI.Component.Dependency
                 if (dependencyTest(sourceComponentIdx, i))
                 {
                     var key = (from k in components where int.Equals(k.Value, i) select k.Key).FirstOrDefault();
-                    dependencies.Add(key);
+                    deps.Add(key);
                 }
             }
 
-            return dependencies;
+            return deps;
         }
 
         int getOrCreateIndex(string componentName)

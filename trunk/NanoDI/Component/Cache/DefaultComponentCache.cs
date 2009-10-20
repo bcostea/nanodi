@@ -64,7 +64,7 @@ namespace NanoDI.Component.Cache
             return Contains(component) && Scope.Singleton.Equals(component.Scope);
         }
 
-        Boolean isPrototype(IComponent component)
+        static Boolean isPrototype(IComponent component)
         {
             return Scope.Prototype.Equals(component.Scope);
         }

@@ -30,62 +30,138 @@ using NanoDI.Attributes;
 using NanoDI.Component.Dependency;
 using NanoDI.Container;
 using NanoDI.Component.ComponentActivator;
+using NanoDI.Tooling.Logging;
 
 namespace NanoDI.Component.Registry
 {
     class DefaultComponentRegistry : IComponentRegistry
     {
-        Dictionary<string, IComponent> components = new Dictionary<string, IComponent>();
+        ILogger log = LogFactory.GetLog(typeof(DefaultComponentRegistry));
+
+        Dictionary<string, IComponent> registeredComponents = new Dictionary<string, IComponent>();
         DependencyGraph dependencyGraph;
 
+        /// <summary>
+        /// Registers a list of components and their dependencies
+        /// </summary>
+        /// <param name="components">A list of components</param>
         public void RegisterAll(List<IComponent> components)
         {
-        	if (dependencyGraph==null)
-        		dependencyGraph = new DependencyGraph(components.Count);
-        	
-        	foreach(IComponent component in components)
-        	{
-                addComponent(component.Name, component);
-                
-                foreach (FieldInfo fieldInfo in component.Type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
-                {
-                    addComponentDependencyIfInjectable(component, fieldInfo);
-                }
-        	}
+            initializeDependencyGraph(components);
+            registerComponents(components);
+            registerDependenciesForComponents(components);
         }
 
-
-        void addComponent(string name, IComponent component)
+        /// <summary>
+        /// Registers a component and it's dependencies
+        /// </summary>
+        /// <param name="component">A component</param>
+        public void RegisterComponent(IComponent component)
         {
-            if (!components.ContainsKey(name))
-                components.Add(name, component);
+            registerComponent(component.Name, component);
+            extractAndAddDependencies(component);
+        }
+
+        void initializeDependencyGraph(List<IComponent> components)
+        {
+            if (dependencyGraph == null)
+                dependencyGraph = new DependencyGraph(components.Count);
+        }
+
+        void registerComponents(List<IComponent> components)
+        {
+            foreach (IComponent component in components)
+            {
+                registerComponent(component.Name, component);
+            }
+        }
+
+        void registerComponent(string name, IComponent component)
+        {
+            if (log.IsDebugEnabled())
+                log.Debug("Trying to register component '" + name + "'");
+
+            if (!registeredComponents.ContainsKey(name))
+                registeredComponents.Add(name, component);
             else
                 throw new ComponentAlreadyExistsException(name);
         }
 
+        void registerDependenciesForComponents(List<IComponent> components)
+        {
+            foreach (IComponent component in components)
+            {
+                extractAndAddDependencies(component);
+            }
+        }
+
+        void extractAndAddDependencies(IComponent component)
+        {
+            foreach (FieldInfo possibleDependencyField in component.Type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
+            {
+                if (log.IsDebugEnabled())
+                    log.Debug("Validating field '" + possibleDependencyField.Name + "' of component '" + component.Name + "'");
+
+                addComponentDependencyIfInjectable(component, possibleDependencyField);
+            }
+        }
+
         void addComponentDependencyIfInjectable(IComponent parentComponent, FieldInfo fieldInfo)
+        {
+            if (fieldIsInjectable(fieldInfo) && fieldIsValidComponent(fieldInfo))
+            {
+                IComponent dependency = registeredComponents[fieldInfo.Name];
+
+                if (log.IsDebugEnabled())
+                    log.Debug("Added '" + dependency.Name + "' as a dependency of '" + parentComponent.Name + "'");
+
+                dependencyGraph.insertDependency(parentComponent.Name, dependency.Name);
+            }
+        }
+
+        Boolean fieldIsInjectable(FieldInfo fieldInfo)
         {
             foreach (Attribute attr in fieldInfo.GetCustomAttributes(true))
             {
                 InjectAttribute inject = attr as InjectAttribute;
                 if (inject != null)
                 {
-                    foreach (IComponent component in components.Values)
-                    {
-                        foreach (Type iFace in getImplementedInterfaces(component.Type))
-                        {
-                            if (iFace.FullName.Equals(fieldInfo.FieldType.FullName))
-                                dependencyGraph.insertDependency(parentComponent.Name, component.Name);
-                        }
-                    }
+                    return true;
                 }
             }
+            return false;
+        }
+
+        Boolean fieldIsValidComponent(FieldInfo fieldInfo)
+        {
+            if(log.IsDebugEnabled())
+                log.Debug( fieldInfo.Name + " is valid component.");
+            
+            return registeredComponents.ContainsKey(fieldInfo.Name)
+                && componentHasInterface(registeredComponents[fieldInfo.Name], fieldInfo.FieldType);
+        }
+
+
+        Boolean componentHasInterface(IComponent component, Type theInterface)
+        {
+            
+            foreach (Type iFace in getImplementedInterfaces(component.Type))
+            {
+                if (iFace.FullName.Equals(theInterface.FullName))
+                {
+                    if (log.IsDebugEnabled())
+                        log.Debug(component.Name + " implements correct interface.");
+            
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<IComponent> GetComponentDependencies(IComponent component)
         {
             List<IComponent> dependencies = new List<IComponent>();
-            List<string> stringDependencies = dependencyGraph.getDependencies(component.Name);
+            List<string> stringDependencies = dependencyGraph.GetDependencies(component.Name);
 
             foreach (string dep in stringDependencies)
             {
@@ -100,29 +176,29 @@ namespace NanoDI.Component.Registry
             return dependencies;
         }
 
-       
+
         private static Type[] getImplementedInterfaces(Type componentType)
         {
             return componentType.GetInterfaces();
         }
 
-		public bool Contains(string componentName)
-		{
-			return components.ContainsKey(componentName);
-		}
-    	
-		public IComponent Get(string componentName)
-		{
-			if(Contains(componentName))
-				return components[componentName];
-			else
-				throw new InvalidComponentException(componentName);
-		}
-    	
-		public Type GetType(string componentName)
-		{
-			return Get(componentName).GetType();
-		}
-    	
+        public bool Contains(string componentName)
+        {
+            return registeredComponents.ContainsKey(componentName);
+        }
+
+        public IComponent Get(string componentName)
+        {
+            if (Contains(componentName))
+                return registeredComponents[componentName];
+            else
+                throw new InvalidComponentException(componentName);
+        }
+
+        public Type GetType(string componentName)
+        {
+            return Get(componentName).GetType();
+        }
+
     }
 }
