@@ -57,7 +57,7 @@ namespace NanoDI.Component.ComponentActivator
                 case Scope.Prototype:
                     return newInstance;
                 default:
-                    throw new Exception();
+                    throw new CompositionException();
             }
 		}
 

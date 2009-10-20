@@ -29,6 +29,7 @@ using NanoDI.Component.Locator;
 using NanoDI.Component.Registry;
 using NanoDI.Container;
 using NanoDI.Exceptions;
+using System.Diagnostics;
 
 [assembly: CLSCompliant(true)]
 namespace NanoDI
@@ -36,6 +37,7 @@ namespace NanoDI
     public sealed class ApplicationContext
     {
     	private static IMutableContainer container = new DefaultContainer();
+        private static UtilityToolbox toolbox = new UtilityToolbox();
 
         #region Singleton
 
@@ -56,8 +58,7 @@ namespace NanoDI
 
         #endregion
 
-
-        #region component accessors
+        #region Component accessors
 
         public static object GetComponent(string componentName)
         {
@@ -65,5 +66,7 @@ namespace NanoDI
         }
 
         #endregion
+
+        public static UtilityToolbox Toolbox { get { return toolbox; } }
     }
 }
