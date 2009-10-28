@@ -30,6 +30,7 @@ namespace NanoDI.Container
     interface IContainer
     {
         void Initialize();
+        void Initialize(string targetNamespace);
         object GetComponent(string name);
     }
 }

@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using NanoDI.Attributes;
 using System.Reflection;
+using System.Linq;
 using NanoDI.Tooling.Logging;
 
 namespace NanoDI.Component.Locator
@@ -32,18 +33,34 @@ namespace NanoDI.Component.Locator
     class ReflectionLocator : ILocator
     {
         ILogger log = LogFactory.GetLog(typeof(ReflectionLocator));
-        Assembly asm = Assembly.GetEntryAssembly();
-            
+
         public List<IComponent> Locate()
         {
-            return LocateInNamespace(asm.EntryPoint.DeclaringType.Namespace);
+            return LocateInNamespace("");
         }
-        
-        public List<IComponent> LocateInNamespace(string namespaceName)
+
+        public List<IComponent> LocateInNamespace(string targetNamespace)
+        {
+            List<Type> types = new List<Type>();
+
+            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            foreach (Assembly asm in assemblies)
+            {
+                IEnumerable<Type> asmTypes = from t in asm.GetTypes()
+                                             where t.IsClass &&
+                                                 (t.Namespace != null && t.Namespace.StartsWith(targetNamespace))
+                                             select t;
+                types.AddRange(asmTypes);
+            }
+
+            return LocateInTypes(types.ToArray());
+        }
+
+        public List<IComponent> LocateInTypes(Type[] types)
         {
             List<IComponent> components = new List<IComponent>();
 
-            foreach (Type type in asm.GetTypes())
+            foreach (Type type in types)
             {
                 foreach (Attribute attr in type.GetCustomAttributes(true))
                 {

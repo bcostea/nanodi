@@ -36,9 +36,11 @@ namespace NanoDI
 {
     public sealed class ApplicationContext
     {
-    	private static IMutableContainer container = new DefaultContainer();
-        private static UtilityToolbox toolbox = new UtilityToolbox();
+        private static State state = State.None;
 
+    	private static IMutableContainer container;
+        private static UtilityToolbox toolbox = new UtilityToolbox();
+        
         #region Singleton
 
         private static readonly ApplicationContext instance = new ApplicationContext();
@@ -51,21 +53,48 @@ namespace NanoDI
             }
         }
 
-        ApplicationContext()
-        {
-            container.Initialize();
-        }
+        ApplicationContext(){}
 
         #endregion
 
-        #region Component accessors
+        public static void Initialize()
+        {
+            if (state.Equals(State.Initialized))
+            {
+                throw new CompositionException("Application context already initialized");
+            }
+
+            state = State.Initializing;
+            container = new DefaultContainer();
+            container.Initialize();
+            state = State.Initialized;
+        }
+
+        public static void Initialize(string targetNamespace)
+        {
+            if (state.Equals(State.Initialized))
+            {
+                throw new CompositionException("Application context already initialized");
+            }
+
+            state = State.Initializing;
+            
+            container = new DefaultContainer();
+            container.Initialize(targetNamespace);
+
+            state = State.Initialized;
+        }
 
         public static object GetComponent(string componentName)
         {
+            if (state.Equals(State.None))
+            {
+                throw new CompositionException("Application context not initialized");
+            }
+
             return container.GetComponent(componentName);
         }
 
-        #endregion
 
         public static UtilityToolbox Toolbox { get { return toolbox; } }
     }
