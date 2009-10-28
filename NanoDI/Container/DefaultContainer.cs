@@ -60,6 +60,11 @@ namespace NanoDI.Container
             componentRegistry.RegisterAll(componentLocator.Locate());
         }
 
+        public void Initialize(string targetNamespace)
+        {
+            componentRegistry.RegisterAll(componentLocator.LocateInNamespace(targetNamespace));
+        }
+
         public object GetComponent(string componentName)
         {
             if (componentRegistry.Contains(componentName))

@@ -32,9 +32,11 @@ namespace NanoDI.Attributes
         Scope scope;
 
         public ComponentAttribute(string name) { this.name = name; this.scope = Scope.Singleton; }
+
         public ComponentAttribute(string name, Scope scope) { this.name = name; this.scope = scope; }
 
         public string Name { get { return name; } }
+
         public Scope Scope { get { return scope; } }
 
     }

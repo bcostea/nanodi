@@ -31,14 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.2.9222, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
@@ -48,6 +49,19 @@
     <Compile Include="ApplicationContextTests.cs" />
     <Compile Include="Component\Cache\DefaultComponentCacheTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestComponents\SimpleComponents\ChildComponent.cs" />
+    <Compile Include="TestComponents\SimpleComponents\ChildPrototypeComponent.cs" />
+    <Compile Include="TestComponents\SimpleComponents\ChildSingletonComponent.cs" />
+    <Compile Include="TestComponents\SimpleComponents\IChildComponent.cs" />
+    <Compile Include="TestComponents\SimpleComponents\IParentComponent.cs" />
+    <Compile Include="TestComponents\SimpleComponents\ParentComponentOne.cs" />
+    <Compile Include="TestComponents\SimpleComponents\ParentComponentTwo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NanoDI\NanoDI.csproj">
+      <Project>{5F35E71C-7948-42A5-A5B1-07821FE089FD}</Project>
+      <Name>NanoDI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Container\" />
