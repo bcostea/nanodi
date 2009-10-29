@@ -35,9 +35,17 @@ namespace NanoDI.Component.Dependency
         int lastDependencyIndex;
         int dependencyCount;
 
-        public DependencyGraph(int components)
+        public DependencyGraph(int componentCount)
         {
-            dependencies = new Boolean[components][];
+            dependencies = new Boolean[componentCount][];
+        }
+
+        public void Clear()
+        {
+            components.Clear();
+            dependencies = new Boolean[0][];
+            dependencyCount = 0;
+            lastDependencyIndex = 0;
         }
 
         public void insertDependency(String dependent, String dependency)

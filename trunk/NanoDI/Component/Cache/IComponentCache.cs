@@ -34,5 +34,6 @@ namespace NanoDI.Component.Cache
         object Get(IComponent component);
         void Put(IComponent componentDefinition, object componentInstance);
         void Remove(IComponent component);
+        void Clear();
     }
 }

@@ -34,11 +34,10 @@ using System.Diagnostics;
 [assembly: CLSCompliant(true)]
 namespace NanoDI
 {
-    public sealed class ApplicationContext
+    public sealed class ApplicationContext : ILifecycle
     {
-        private static State state = State.None;
-
-    	private static IMutableContainer container;
+        private static IMutableContainer container;
+        private static Lifecycle lifecycle = new Lifecycle();
         private static UtilityToolbox toolbox = new UtilityToolbox();
         
         #region Singleton
@@ -57,45 +56,71 @@ namespace NanoDI
 
         #endregion
 
+        void ILifecycle.Initialize()
+        {
+            ApplicationContext.Initialize();
+        }
+
+        void ILifecycle.Destroy()
+        {
+            ApplicationContext.Destroy();
+        }
+
         public static void Initialize()
         {
-            if (state.Equals(State.Initialized))
-            {
-                throw new CompositionException("Application context already initialized");
-            }
+            beforeInitialize();
+            initializeContainer(null);
+            afterInitialize();
+        }
 
-            state = State.Initializing;
-            container = new DefaultContainer();
-            container.Initialize();
-            state = State.Initialized;
+
+        public static void Destroy()
+        {
+            lifecycle.BeforeDestroy();
+            container.Destroy();
+            lifecycle.Destroyed();
         }
 
         public static void Initialize(string targetNamespace)
         {
-            if (state.Equals(State.Initialized))
-            {
-                throw new CompositionException("Application context already initialized");
-            }
+            beforeInitialize();
+            initializeContainer(targetNamespace);
+            afterInitialize();
+        }
 
-            state = State.Initializing;
-            
+        private static void initializeContainer(string targetNamespace)
+        {
             container = new DefaultContainer();
-            container.Initialize(targetNamespace);
+            
+            if (targetNamespace == null)
+            {
+                container.Initialize();
+            }
+            else
+            {
+                container.Initialize(targetNamespace);
+            }
+        }
 
-            state = State.Initialized;
+        private static void beforeInitialize()
+        {
+            lifecycle.NotInitializedRequired();
+            lifecycle.BeforeInitialize();
+        }
+
+
+        private static void afterInitialize()
+        {
+            lifecycle.Initialized();
         }
 
         public static object GetComponent(string componentName)
         {
-            if (state.Equals(State.None))
-            {
-                throw new CompositionException("Application context not initialized");
-            }
-
+            lifecycle.InitializedRequired();
             return container.GetComponent(componentName);
         }
 
-
         public static UtilityToolbox Toolbox { get { return toolbox; } }
+        public static Lifecycle Lifecycle { get { return lifecycle; } }
     }
 }

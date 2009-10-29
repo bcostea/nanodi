@@ -62,6 +62,15 @@ namespace NanoDI.Component.Registry
             extractAndAddDependencies(component);
         }
 
+        public void UnregisterAll()
+        {
+            if (log.IsDebugEnabled())
+                log.Debug("Unregistering components.");
+
+            registeredComponents.Clear();
+            dependencyGraph.Clear();
+        }
+
         void initializeDependencyGraph(List<IComponent> components)
         {
             if (dependencyGraph == null)

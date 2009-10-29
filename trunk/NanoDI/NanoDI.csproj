@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="ILifecycle.cs" />
+    <Compile Include="ILifecycleObserver.cs" />
+    <Compile Include="Lifecycle.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
     <Compile Include="Attributes\InjectAttribute.cs" />
     <Compile Include="Attributes\Scope.cs" />

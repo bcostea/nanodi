@@ -34,5 +34,7 @@ namespace NanoDI.Component.Registry
         void RegisterAll(List<IComponent> components);
 
         List<IComponent> GetComponentDependencies(IComponent component);
+
+        void UnregisterAll();
     }
 }
