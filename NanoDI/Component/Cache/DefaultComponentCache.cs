@@ -77,5 +77,10 @@ namespace NanoDI.Component.Cache
             }
         }
 
+        public void Clear()
+        {
+            cache.Clear();
+        }
+
     }
 }

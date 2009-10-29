@@ -65,6 +65,12 @@ namespace NanoDI.Container
             componentRegistry.RegisterAll(componentLocator.LocateInNamespace(targetNamespace));
         }
 
+        public void Destroy()
+        {
+            componentRegistry.UnregisterAll();
+            componentCache.Clear();
+        }
+
         public object GetComponent(string componentName)
         {
             if (componentRegistry.Contains(componentName))

@@ -11,8 +11,20 @@ namespace NanoDIUnitTests.TestComponents.SimpleComponents
     class ParentComponentTwo
     {
         [Inject]
-        IChildComponent singletonComponent;
+        IChildComponent singletonComponent = null;
         [Inject]
-        IChildComponent prototypeComponent;
+        IChildComponent prototypeComponent = null;
+
+        public string SingletonContent
+        {
+            get { return singletonComponent.Content; }
+            set { singletonComponent.Content = value; }
+        }
+
+        public string PrototypeContent
+        {
+            get { return prototypeComponent.Content; }
+            set { prototypeComponent.Content = value; }
+        }
     }
 }
