@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
+    <Compile Include="Container\TreeContainer.cs" />
     <Compile Include="ILifecycle.cs" />
     <Compile Include="ILifecycleObserver.cs" />
     <Compile Include="Lifecycle.cs" />

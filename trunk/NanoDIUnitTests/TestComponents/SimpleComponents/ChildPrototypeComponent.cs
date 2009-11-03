@@ -6,7 +6,7 @@ using NanoDI.Attributes;
 
 namespace NanoDIUnitTests.TestComponents.SimpleComponents
 {
-    [Component("childPrototype",Scope.Prototype)]
+    [Component("prototypeComponent", Scope.Prototype)]
     class ChildPrototypeComponent:ChildComponent
     {
 

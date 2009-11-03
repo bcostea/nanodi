@@ -52,7 +52,6 @@ namespace NanoDI.Component.ComponentActivator
             switch (component.Scope)
             {
                 case Scope.Singleton:
-                    componentCache.Put(component, newInstance);
                     return newInstance;
                 case Scope.Prototype:
                     return newInstance;
@@ -84,6 +83,11 @@ namespace NanoDI.Component.ComponentActivator
                         else
                             throw new CompositionException();
                     }
+                }
+
+                if (Scope.Singleton.Equals(component.Scope))
+                {
+                    componentCache.Put(component, actualComponentInstance);
                 }
 
                 return actualComponentInstance;

@@ -6,8 +6,12 @@ using NanoDI.Attributes;
 
 namespace NanoDIUnitTests.TestComponents.SimpleComponents
 {
-    [Component("childSingleton")]
+    [Component("singletonComponent")]
     class ChildSingletonComponent:ChildComponent
     {
+        public ChildSingletonComponent()
+        {
+            Content = "Singleton";
+        }
     }
 }

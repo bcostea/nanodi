@@ -36,61 +36,45 @@ namespace NanoDI
 {
     public sealed class ApplicationContext : ILifecycle
     {
-        private static IMutableContainer container;
-        private static Lifecycle lifecycle = new Lifecycle();
-        private static UtilityToolbox toolbox = new UtilityToolbox();
-        
-        #region Singleton
+        private IMutableContainer container;
+        private Lifecycle lifecycle = new Lifecycle();
+        private UtilityToolbox toolbox = new UtilityToolbox();
 
-        private static readonly ApplicationContext instance = new ApplicationContext();
 
-        public static ApplicationContext Instance
+        public ApplicationContext()
         {
-            get
-            {
-                return instance;
-            }
+
         }
 
-        ApplicationContext(){}
-
-        #endregion
-
-        void ILifecycle.Initialize()
+        public ApplicationContext(string targetNamespace)
         {
-            ApplicationContext.Initialize();
+            Initialize(targetNamespace);
         }
 
-        void ILifecycle.Destroy()
-        {
-            ApplicationContext.Destroy();
-        }
-
-        public static void Initialize()
+        public void Initialize()
         {
             beforeInitialize();
             initializeContainer(null);
             afterInitialize();
         }
 
-
-        public static void Destroy()
+        public void Destroy()
         {
             lifecycle.BeforeDestroy();
             container.Destroy();
             lifecycle.Destroyed();
         }
 
-        public static void Initialize(string targetNamespace)
+        public void Initialize(string targetNamespace)
         {
             beforeInitialize();
             initializeContainer(targetNamespace);
             afterInitialize();
         }
 
-        private static void initializeContainer(string targetNamespace)
+        private void initializeContainer(string targetNamespace)
         {
-            container = new DefaultContainer();
+            container = new TreeContainer();
             
             if (targetNamespace == null)
             {
@@ -102,25 +86,25 @@ namespace NanoDI
             }
         }
 
-        private static void beforeInitialize()
+        private void beforeInitialize()
         {
             lifecycle.NotInitializedRequired();
             lifecycle.BeforeInitialize();
         }
 
 
-        private static void afterInitialize()
+        private void afterInitialize()
         {
             lifecycle.Initialized();
         }
 
-        public static object GetComponent(string componentName)
+        public object GetComponent(string componentName)
         {
             lifecycle.InitializedRequired();
             return container.GetComponent(componentName);
         }
 
-        public static UtilityToolbox Toolbox { get { return toolbox; } }
-        public static Lifecycle Lifecycle { get { return lifecycle; } }
+        public UtilityToolbox Toolbox { get { return toolbox; } }
+        public Lifecycle Lifecycle { get { return lifecycle; } }
     }
 }

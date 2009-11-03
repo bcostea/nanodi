@@ -43,12 +43,12 @@ namespace NanoDI
             }
         }
 
-        public void Register(ILifecycleObserver observer)
+        public void RegisterObserver(ILifecycleObserver observer)
         {
             observers.Add(observer);
         }
 
-        public void Unregister(ILifecycleObserver observer)
+        public void UnregisterObserver(ILifecycleObserver observer)
         {
             if (observers.Contains(observer))
             {

@@ -31,9 +31,10 @@ namespace NanoDIExample
     {
         static void Main(string[] args)
         {
-            
-            ApplicationContext.Initialize("NanoDIExample");
-            IMainComponent mainComponent = (IMainComponent) ApplicationContext.GetComponent("mainComponent");
+
+            ApplicationContext appCtx = new ApplicationContext("NanoDIExample");
+
+            IMainComponent mainComponent = (IMainComponent) appCtx.GetComponent("mainComponent");
 
             mainComponent.start();
 
