@@ -43,14 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationContext.cs" />
+    <Compile Include="App.cs" />
+    <Compile Include="AbstractApplicationContext.cs" />
+    <Compile Include="Component\ComponentField.cs" />
+    <Compile Include="Component\Locator\XmlLocator.cs" />
     <Compile Include="Container\TreeContainer.cs" />
+    <Compile Include="IApplicationContext.cs" />
     <Compile Include="ILifecycle.cs" />
     <Compile Include="ILifecycleObserver.cs" />
     <Compile Include="Lifecycle.cs" />
     <Compile Include="Attributes\ComponentAttribute.cs" />
     <Compile Include="Attributes\InjectAttribute.cs" />
     <Compile Include="Attributes\Scope.cs" />
+    <Compile Include="AttributeApplicationContext.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Component\Cache\DefaultComponentCache.cs" />
     <Compile Include="Component\Cache\IComponentCache.cs" />
@@ -96,6 +101,7 @@
     <Compile Include="Tooling\Properties\PropertyManager\IPropertyManager.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\XMLPropertyManager.cs" />
     <Compile Include="UtilityToolbox.cs" />
+    <Compile Include="XmlApplicationContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

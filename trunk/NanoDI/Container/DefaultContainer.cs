@@ -38,59 +38,59 @@ using NanoDI.Component.Cache;
 
 namespace NanoDI.Container
 {
-    class DefaultContainer : IMutableContainer
-    {
-        
-        IComponentRegistry componentRegistry;
-        ILocator componentLocator;
-        IComponentActivator componentActivator;
-        IComponentCache componentCache;
+	class DefaultContainer : IMutableContainer
+	{
 
-        public DefaultContainer()
-        {
-            
-                this.componentRegistry = new DefaultComponentRegistry();
-                this.componentCache = new DefaultComponentCache();
-                this.componentLocator = new ReflectionLocator(); 
-                this.componentActivator = new DefaultComponentActivator(this.componentRegistry, this.componentCache);
-        }
+		IComponentRegistry componentRegistry;
+		ILocator componentLocator;
+		IComponentActivator componentActivator;
+		IComponentCache componentCache;
 
-        public void Initialize()
-        {
-            componentRegistry.RegisterAll(componentLocator.Locate());
-        }
+		public DefaultContainer(ILocator componentLocator)
+		{
+			this.componentLocator = componentLocator;
 
-        public void Initialize(string targetNamespace)
-        {
-            componentRegistry.RegisterAll(componentLocator.LocateInNamespace(targetNamespace));
-        }
+			this.componentRegistry = new DefaultComponentRegistry();
+			this.componentCache = new DefaultComponentCache();
+			this.componentActivator = new DefaultComponentActivator(this.componentRegistry, this.componentCache);
+		}
 
-        public void Destroy()
-        {
-            componentRegistry.UnregisterAll();
-            componentCache.Clear();
-        }
+		public void Initialize()
+		{
+			componentRegistry.RegisterAll(componentLocator.Locate());
+		}
 
-        public object GetComponent(string componentName)
-        {
-            if (componentRegistry.Contains(componentName))
-            {
-            	IComponent component = componentRegistry.Get(componentName);
-            	return componentActivator.GetInstance(component);
-                
-            }
-            else
-                throw new InvalidComponentException(componentName);
-        }
-    	
+		public void Initialize(string componentSource)
+		{
+			componentRegistry.RegisterAll(componentLocator.Locate(componentSource));
+		}
+
+		public void Destroy()
+		{
+			componentRegistry.UnregisterAll();
+			componentCache.Clear();
+		}
+
+		public object GetComponent(string componentName)
+		{
+			if (componentRegistry.Contains(componentName))
+			{
+				IComponent component = componentRegistry.Get(componentName);
+				return componentActivator.GetInstance(component);
+
+			}
+			else
+				throw new InvalidComponentException(componentName);
+		}
+
 		public IMutableContainer AddComponent(string name, object component)
 		{
 			throw new NotImplementedException();
 		}
 
-        public Boolean HasComponent(string componentName)
-        {
-            return componentRegistry.Contains(componentName);
-        }
-    }
+		public Boolean HasComponent(string componentName)
+		{
+			return componentRegistry.Contains(componentName);
+		}
+	}
 }

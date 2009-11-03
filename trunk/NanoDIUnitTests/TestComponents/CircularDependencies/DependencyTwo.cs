@@ -8,7 +8,7 @@ namespace NanoDIUnitTests.TestComponents.CircularDependencies
     class DependencyTwo
     {
         [Inject]
-        ICircularDependency dependencyOne;
+        ICircularDependency dependencyOne=null;
 
         public ICircularDependency OtherDependency { get { return dependencyOne; } }
     }
