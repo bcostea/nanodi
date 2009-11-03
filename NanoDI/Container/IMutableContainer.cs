@@ -25,7 +25,7 @@ using System;
 
 namespace NanoDI.Container
 {
-    interface IMutableContainer:IContainer
+    internal interface IMutableContainer:IContainer
     {
         IMutableContainer AddComponent(string name, object component);
     }

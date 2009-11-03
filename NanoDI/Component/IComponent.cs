@@ -22,6 +22,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using NanoDI.Attributes;
 
 namespace NanoDI.Component
@@ -31,5 +32,8 @@ namespace NanoDI.Component
         string Name { get; }
         Type Type { get; }
         Scope Scope { get; }
+
+		List<ComponentField> Fields { get; set; }
+
     }
 }

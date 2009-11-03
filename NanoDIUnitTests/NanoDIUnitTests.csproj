@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttributeApplicationContextTest.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LifecycleTest.cs" />
-    <Compile Include="ApplicationContextTest.cs" />
+    <Compile Include="AbstractApplicationContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestComponents\CircularDependencies\DependencyOne.cs" />
     <Compile Include="TestComponents\CircularDependencies\DependencyTwo.cs" />
@@ -60,12 +62,21 @@
     <Compile Include="TestComponents\SimpleComponents\ParentComponentOne.cs" />
     <Compile Include="TestComponents\SimpleComponents\ParentComponentTwo.cs" />
     <Compile Include="UtilityToolboxTest.cs" />
+    <Compile Include="XmlApplicationContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NanoDI\NanoDI.csproj">
       <Project>{5F35E71C-7948-42A5-A5B1-07821FE089FD}</Project>
       <Name>NanoDI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="circular.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="components.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

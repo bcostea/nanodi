@@ -31,80 +31,60 @@ using NanoDI.Container;
 using NanoDI.Exceptions;
 using System.Diagnostics;
 
-[assembly: CLSCompliant(true)]
 namespace NanoDI
 {
-    public sealed class ApplicationContext : ILifecycle
+	public abstract class AbstractApplicationContext : IApplicationContext
     {
-        private IMutableContainer container;
-        private Lifecycle lifecycle = new Lifecycle();
-        private UtilityToolbox toolbox = new UtilityToolbox();
+	
+		internal IMutableContainer container;
+		Lifecycle contextLifecycle = new Lifecycle();
 
-
-        public ApplicationContext()
+		protected AbstractApplicationContext()
         {
-
+			Initialize();
         }
 
-        public ApplicationContext(string targetNamespace)
+		protected AbstractApplicationContext(string initializationParameter)
         {
-            Initialize(targetNamespace);
+			Initialize(initializationParameter);
         }
+
+		public abstract void Initialize(string initializationParameter);
+		public abstract void InitializeContainer(string initializationParameter);
 
         public void Initialize()
         {
             beforeInitialize();
-            initializeContainer(null);
+            InitializeContainer(null);
             afterInitialize();
         }
 
         public void Destroy()
         {
-            lifecycle.BeforeDestroy();
+			contextLifecycle.BeforeDestroy();
             container.Destroy();
-            lifecycle.Destroyed();
-        }
-
-        public void Initialize(string targetNamespace)
-        {
-            beforeInitialize();
-            initializeContainer(targetNamespace);
-            afterInitialize();
-        }
-
-        private void initializeContainer(string targetNamespace)
-        {
-            container = new TreeContainer();
-            
-            if (targetNamespace == null)
-            {
-                container.Initialize();
-            }
-            else
-            {
-                container.Initialize(targetNamespace);
-            }
-        }
-
-        private void beforeInitialize()
-        {
-            lifecycle.NotInitializedRequired();
-            lifecycle.BeforeInitialize();
+			contextLifecycle.Destroyed();
         }
 
 
-        private void afterInitialize()
+        protected void beforeInitialize()
         {
-            lifecycle.Initialized();
+			contextLifecycle.NotInitializedRequired();
+			contextLifecycle.BeforeInitialize();
+        }
+
+
+		protected void afterInitialize()
+        {
+			contextLifecycle.Initialized();
         }
 
         public object GetComponent(string componentName)
         {
-            lifecycle.InitializedRequired();
+			contextLifecycle.InitializedRequired();
             return container.GetComponent(componentName);
         }
 
-        public UtilityToolbox Toolbox { get { return toolbox; } }
-        public Lifecycle Lifecycle { get { return lifecycle; } }
+		public Lifecycle Lifecycle { get { return contextLifecycle; } }
     }
 }

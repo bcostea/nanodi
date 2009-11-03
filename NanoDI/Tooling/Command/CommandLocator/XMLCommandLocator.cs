@@ -7,5 +7,6 @@ namespace NanoDI.Tooling.Command.CommandLocator
 {
     class XMLCommandLocator
     {
+
     }
 }

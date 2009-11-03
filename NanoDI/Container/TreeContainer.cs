@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using NanoDI.Component.Locator;
 using NanoDI.Exceptions;
 
 namespace NanoDI.Container
@@ -9,6 +8,8 @@ namespace NanoDI.Container
     class TreeContainer : DefaultContainer
     {
         List<IMutableContainer> childContainers = new List<IMutableContainer>();
+
+		public TreeContainer(ILocator componentLocator) : base(componentLocator) { }
 
         public new object GetComponent(string componentName)
         {

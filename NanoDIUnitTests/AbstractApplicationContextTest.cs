@@ -7,33 +7,23 @@ using NanoDIUnitTests.TestComponents.CircularDependencies;
 namespace NanoDIUnitTests
 {
 
-    [TestFixture()]
-    class ApplicationContextTest
+
+    abstract class AbstractApplicationContextTest
     {
-        ApplicationContext applicationContext;
+        protected IApplicationContext applicationContext;
 
         IParentComponent parentComponentOne;
         IChildComponent childComponentSingleton;
         IChildComponent childComponentPrototype;
 
 
-        [SetUp]
-        public void Setup()
-        {
-            applicationContext = new ApplicationContext("NanoDIUnitTests.TestComponents.SimpleComponents");
-        }
+		abstract public void Setup();
+
+		public abstract void ApplicationContext_InitializeWithSource();
+		public abstract void ApplicationContext_GetComponentCircularDependency();
 
         [Test]
-        public void ApplicationContext_InitializeNamespace()
-        {
-            ApplicationContext_Destroy();
-
-            applicationContext.Initialize("NanoDIUnitTests.TestComponents.SimpleComponents");
-            applicationContext.Lifecycle.InitializedRequired();
-        }
-
-        [Test]
-        public void ApplicationContext_InitializeNoNamespace()
+        public void ApplicationContext_InitializeWithNoSource()
         {
             ApplicationContext_Destroy();
 
@@ -111,22 +101,6 @@ namespace NanoDIUnitTests
         public void ApplicationContext_GetComponentInvalid()
         {
             parentComponentOne = (IParentComponent)applicationContext.GetComponent("invalidComponent");
-        }
-
-
-        [Test]
-        public void ApplicationContext_GetComponentCircularDependency()
-        {
-            ApplicationContext_Destroy();
-            applicationContext.Initialize("NanoDIUnitTests.TestComponents.CircularDependencies");
-
-            ICircularDependency depOne =  (ICircularDependency) applicationContext.GetComponent("dependencyOne");
-            ICircularDependency depTwo = (ICircularDependency) applicationContext.GetComponent("dependencyOne");
-
-            Assert.NotNull(depOne.OtherDependency);
-            Assert.NotNull(depTwo.OtherDependency);
-
-
         }
 
         [TearDown]

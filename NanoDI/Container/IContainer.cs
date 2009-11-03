@@ -27,7 +27,7 @@ using System.Collections.Generic;
 
 namespace NanoDI.Container
 {
-    interface IContainer:ILifecycle
+    internal interface IContainer:ILifecycle
     {
         void Initialize(string targetNamespace);
         Boolean HasComponent(string name);

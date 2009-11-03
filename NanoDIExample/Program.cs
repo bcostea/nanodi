@@ -32,7 +32,7 @@ namespace NanoDIExample
         static void Main(string[] args)
         {
 
-            ApplicationContext appCtx = new ApplicationContext("NanoDIExample");
+            AbstractApplicationContext appCtx = new AttributeApplicationContext("NanoDIExample");
 
             IMainComponent mainComponent = (IMainComponent) appCtx.GetComponent("mainComponent");
 

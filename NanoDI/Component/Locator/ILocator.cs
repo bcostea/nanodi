@@ -29,7 +29,6 @@ namespace NanoDI.Component.Locator
     interface ILocator
     {
         List<IComponent> Locate();
-
-        List<IComponent> LocateInNamespace(string targetNamespace);
+		List<IComponent> Locate(string componentSource);
     }
 }

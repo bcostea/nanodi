@@ -26,7 +26,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using NanoDI.Exceptions;
-using NanoDI.Attributes;
 using NanoDI.Component.Dependency;
 using NanoDI.Container;
 using NanoDI.Component.ComponentActivator;
@@ -106,18 +105,16 @@ namespace NanoDI.Component.Registry
 
         void extractAndAddDependencies(IComponent component)
         {
-            foreach (FieldInfo possibleDependencyField in component.Type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
-            {
-                if (log.IsDebugEnabled())
-                    log.Debug("Validating field '" + possibleDependencyField.Name + "' of component '" + component.Name + "'");
-
-                addComponentDependencyIfInjectable(component, possibleDependencyField);
-            }
+			foreach (ComponentField componentField in component.Fields)
+			{
+				FieldInfo possibleDependencyField = component.Type.GetField(componentField.Name, BindingFlags.NonPublic | BindingFlags.Instance);
+				addComponentDependencyIfValid(component, possibleDependencyField);
+			}
         }
 
-        void addComponentDependencyIfInjectable(IComponent parentComponent, FieldInfo fieldInfo)
+        void addComponentDependencyIfValid(IComponent parentComponent, FieldInfo fieldInfo)
         {
-            if (fieldIsInjectable(fieldInfo) && fieldIsValidComponent(fieldInfo))
+            if (fieldIsValidComponent(fieldInfo))
             {
                 IComponent dependency = registeredComponents[fieldInfo.Name];
 
@@ -128,23 +125,12 @@ namespace NanoDI.Component.Registry
             }
         }
 
-        Boolean fieldIsInjectable(FieldInfo fieldInfo)
-        {
-            foreach (Attribute attr in fieldInfo.GetCustomAttributes(true))
-            {
-                InjectAttribute inject = attr as InjectAttribute;
-                if (inject != null)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+       
 
         Boolean fieldIsValidComponent(FieldInfo fieldInfo)
         {
             if(log.IsDebugEnabled())
-                log.Debug( fieldInfo.Name + " is valid component.");
+                log.Debug( "Validating field " + fieldInfo.Name);
             
             return registeredComponents.ContainsKey(fieldInfo.Name)
                 && componentHasInterface(registeredComponents[fieldInfo.Name], fieldInfo.FieldType);

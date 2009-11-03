@@ -36,12 +36,17 @@ namespace NanoDI.Component.Locator
 
         public List<IComponent> Locate()
         {
-            return LocateInNamespace("");
+            return Locate("");
         }
 
-        public List<IComponent> LocateInNamespace(string targetNamespace)
+        public List<IComponent> Locate(string targetNamespace)
         {
             List<Type> types = new List<Type>();
+
+			if (log.IsDebugEnabled())
+			{
+				log.Debug("Locating components defined in namespace \"" + targetNamespace + "\"");
+			}
 
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly asm in assemblies)
@@ -64,17 +69,50 @@ namespace NanoDI.Component.Locator
             {
                 foreach (Attribute attr in type.GetCustomAttributes(true))
                 {
-                    ComponentAttribute component = attr as ComponentAttribute;
-                    if (component != null)
+                    ComponentAttribute componentAttr = attr as ComponentAttribute;
+					if (componentAttr != null)
                     {
                         if (log.IsDebugEnabled())
-                            log.Debug("Component located " + component.Name);
-                        components.Add(new Component(component.Name, type, component.Scope));
+							log.Debug("Component located " + componentAttr.Name);
+
+						Component component = new Component(componentAttr.Name, type, componentAttr.Scope);
+						component.Fields = getInjectableFields(type);
+                        components.Add(component);
 
                     }
                 }
             }
             return components;
         }
+
+		List<ComponentField> getInjectableFields(Type type)
+		{
+			List<ComponentField> fields = new List<ComponentField>();
+
+			foreach (FieldInfo possibleDependencyField in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
+			{
+				if(fieldIsInjectable(possibleDependencyField))
+				{
+					fields.Add(new ComponentField(possibleDependencyField.Name));
+				}
+
+			}
+
+			return fields;
+		}
+
+		Boolean fieldIsInjectable(FieldInfo fieldInfo)
+		{
+			foreach (Attribute attr in fieldInfo.GetCustomAttributes(true))
+			{
+				InjectAttribute inject = attr as InjectAttribute;
+				if (inject != null)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
     }
 }
