@@ -32,8 +32,6 @@ namespace NanoDI.Component.Dependency
     {
         Boolean[][] dependencies;
         Dictionary<string, int> components = new Dictionary<string, int>();
-        int lastDependencyIndex;
-        int dependencyCount;
 
         public DependencyGraph(int componentCount)
         {
@@ -42,10 +40,8 @@ namespace NanoDI.Component.Dependency
 
         public void Clear()
         {
-            components.Clear();
             dependencies = new Boolean[0][];
-            dependencyCount = 0;
-            lastDependencyIndex = 0;
+            components.Clear();
         }
 
         public void insertDependency(String dependent, String dependency)
@@ -56,32 +52,31 @@ namespace NanoDI.Component.Dependency
             initDefaultDependency(dependentIndex);
             initDefaultDependency(dependencyIndex);
 
-            validateNonCircularDependency(dependent, dependency);
-            
             markAsDependent(dependentIndex, dependencyIndex);
+
+            validateNonCircularDependency(dependentIndex, dependencyIndex);
         }
 
-        void initDefaultDependency(int index){
+        void initDefaultDependency(int index)
+        {
             if (dependencies[index] == null)
                 dependencies[index] = new Boolean[dependencies.Length];
         }
 
-        void markAsDependent(int dependentIndex, int dependencyIndex){
+        void markAsDependent(int dependentIndex, int dependencyIndex)
+        {
             if (dependencies[dependentIndex][dependencyIndex] == false)
             {
                 dependencies[dependentIndex][dependencyIndex] = true;
-                dependencyCount++;
             }
         }
 
-        void validateNonCircularDependency(string dependent, string dependency)
+        void validateNonCircularDependency(int componentIndex, int otherComponentIndex)
         {
-            int dependentIndex = getOrCreateIndex(dependent);
-            int dependencyIndex = getOrCreateIndex(dependency);
-
-            if (dependencies[dependencyIndex][dependentIndex])
+            if (dependencyTest(componentIndex, otherComponentIndex)
+                && dependencyTest(otherComponentIndex, componentIndex))
             {
-                throw new CircularDependencyException(dependent + "," + dependency);
+                throw new CircularDependencyException(getComponentByIndex(componentIndex) + "," + getComponentByIndex(otherComponentIndex));
             }
         }
 
@@ -98,17 +93,22 @@ namespace NanoDI.Component.Dependency
                 return deps;
 
             int sourceComponentIdx = components[componentName];
-            
-            for (int i = 0; i < dependencyCount + 1; i++)
+
+            foreach(int i in components.Values)
             {
                 if (dependencyTest(sourceComponentIdx, i))
                 {
-                    var key = (from k in components where int.Equals(k.Value, i) select k.Key).FirstOrDefault();
-                    deps.Add(key);
+                    deps.Add(getComponentByIndex(i));
                 }
             }
 
             return deps;
+        }
+
+        String getComponentByIndex(int i)
+        {
+            string key = (from k in components where int.Equals(k.Value, i) select k.Key).FirstOrDefault();
+            return key;        
         }
 
         int getOrCreateIndex(string componentName)
@@ -116,7 +116,7 @@ namespace NanoDI.Component.Dependency
             int index;
             if (!components.ContainsKey(componentName))
             {
-                index = lastDependencyIndex++;
+                index = components.Count();
                 components.Add(componentName, index);
             }
             else

@@ -9,7 +9,7 @@ namespace NanoDI.Tooling.Logging
     public sealed class LogFactory
     {
         static Dictionary<string, ILogger> loggers = new Dictionary<string, ILogger>();
-
+        static UtilityToolbox toolbox = new UtilityToolbox();
 
         #region Singleton
 
@@ -31,7 +31,7 @@ namespace NanoDI.Tooling.Logging
 
         public static Boolean IsDebugEnabled()
         {
-            return ApplicationContext.Toolbox.IsDebugEnabled();
+            return toolbox.IsDebugEnabled();
         }
 
 

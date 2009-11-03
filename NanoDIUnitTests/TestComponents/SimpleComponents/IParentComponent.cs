@@ -7,5 +7,6 @@ namespace NanoDIUnitTests.TestComponents.SimpleComponents
 {
     interface IParentComponent
     {
+        string SingletonContent { get; set; }
     }
 }

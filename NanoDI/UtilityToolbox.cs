@@ -16,7 +16,7 @@ namespace NanoDI
         /// <returns></returns>
         public Boolean IsDebugEnabled()
         {
-            if (debugCheckHelper == -1)
+            if (debugCheckHelper < 0)
             {
                 Assembly thisAssembly = Assembly.GetAssembly(typeof(ApplicationContext));
                 DebuggableAttribute debuggable = (DebuggableAttribute)DebuggableAttribute.GetCustomAttribute(thisAssembly, typeof(DebuggableAttribute));

@@ -87,5 +87,10 @@ namespace NanoDI.Container
 		{
 			throw new NotImplementedException();
 		}
+
+        public Boolean HasComponent(string componentName)
+        {
+            return componentRegistry.Contains(componentName);
+        }
     }
 }
