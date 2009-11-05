@@ -73,14 +73,8 @@ namespace NanoDI.Container
 
 		public object GetComponent(string componentName)
 		{
-			if (componentRegistry.Contains(componentName))
-			{
 				IComponent component = componentRegistry.Get(componentName);
 				return componentActivator.GetInstance(component);
-
-			}
-			else
-				throw new InvalidComponentException(componentName);
 		}
 
 		public IMutableContainer AddComponent(string name, object component)

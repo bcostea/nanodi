@@ -9,23 +9,6 @@ namespace NanoDI.Exceptions
         public ComponentAlreadyExistsException(string componentName) :
             base("A component named [" + componentName + "] is already declared!")
         {
-
-        }
-
-
-        public ComponentAlreadyExistsException()
-        {
-
-        }
-        public ComponentAlreadyExistsException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-
-        }
-        protected ComponentAlreadyExistsException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-
         }
     }
 }

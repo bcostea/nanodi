@@ -49,7 +49,7 @@ namespace NanoDI.Component.Cache
 
         public void Put(IComponent componentDefinition, object componentInstance)
         {
-            if (isSingletonOverlap(componentDefinition) || isPrototype(componentDefinition))
+			if (Contains(componentDefinition) || isPrototype(componentDefinition))
             {
                 throw new CompositionException();
             }
@@ -57,11 +57,6 @@ namespace NanoDI.Component.Cache
             {
                 cache.Add(componentDefinition, componentInstance);
             }
-        }
-
-        Boolean isSingletonOverlap(IComponent component)
-        {
-            return Contains(component) && Scope.Singleton.Equals(component.Scope);
         }
 
         static Boolean isPrototype(IComponent component)

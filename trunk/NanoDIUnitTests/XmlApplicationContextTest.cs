@@ -29,8 +29,23 @@ namespace NanoDIUnitTests
 		public override void ApplicationContext_GetComponentCircularDependency()
 		{
 			ApplicationContext_Destroy();
+
 			applicationContext.Initialize("circular.xml");
 		}
 
+		[Test]
+		public void XmlApplicationContextWithFile()
+		{
+			ApplicationContext_Destroy();
+			applicationContext = new XmlApplicationContext("circular.xml");
+		}
+
+		[Test]
+		[ExpectedException("NanoDI.Exceptions.ComponentAlreadyExistsException")]
+		public void ApplicationContextNameOverlap()
+		{
+			ApplicationContext_Destroy();
+			applicationContext = new XmlApplicationContext("nameoverlap.xml");
+		}
 	}
 }

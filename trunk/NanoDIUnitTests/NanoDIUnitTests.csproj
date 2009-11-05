@@ -61,6 +61,7 @@
     <Compile Include="TestComponents\SimpleComponents\IParentComponent.cs" />
     <Compile Include="TestComponents\SimpleComponents\ParentComponentOne.cs" />
     <Compile Include="TestComponents\SimpleComponents\ParentComponentTwo.cs" />
+    <Compile Include="TestComponents\TestLifecycleObserver.cs" />
     <Compile Include="UtilityToolboxTest.cs" />
     <Compile Include="XmlApplicationContextTest.cs" />
   </ItemGroup>
@@ -71,6 +72,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="nameoverlap.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="circular.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

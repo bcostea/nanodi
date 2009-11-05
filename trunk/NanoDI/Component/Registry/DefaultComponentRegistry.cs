@@ -189,11 +189,5 @@ namespace NanoDI.Component.Registry
             else
                 throw new InvalidComponentException(componentName);
         }
-
-        public Type GetType(string componentName)
-        {
-            return Get(componentName).GetType();
-        }
-
     }
 }

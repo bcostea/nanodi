@@ -1,6 +1,7 @@
 ﻿using System;
 using NanoDI;
 using NUnit.Framework;
+using NanoDIUnitTests.TestComponents;
 
 namespace NanoDIUnitTests
 {
@@ -8,11 +9,12 @@ namespace NanoDIUnitTests
     class LifecycleTest
     {
         Lifecycle lifecycle;
-
+		TestLifecycleObserver lifecycleObserver;
         [SetUp]
         public void Setup()
         {
             lifecycle = new Lifecycle();
+			lifecycleObserver = new TestLifecycleObserver();
         }
 
         [Test]
@@ -51,6 +53,64 @@ namespace NanoDIUnitTests
             lifecycle.InitializedRequired();
         }
 
+		[Test]
+		public void LifecycleRegisterObserver()
+		{
+			lifecycle.RegisterObserver(lifecycleObserver);
+		}
+
+		[Test]
+		public void LifecycleObserverNone()
+		{
+			LifecycleRegisterObserver();
+			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.Initial);
+		}
+
+
+		[Test]
+		public void LifecycleObserverBeforeInit()
+		{
+			LifecycleRegisterObserver();
+			lifecycle.BeforeInitialize();
+			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.BeforeInit);
+		}
+
+
+		[Test]
+		public void LifecycleObserverAfterInit()
+		{
+			LifecycleRegisterObserver();
+			lifecycle.Initialized();
+			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.AfterInit);
+		}
+
+		[Test]
+		public void LifecycleObserverBeforeDestroyed()
+		{
+			LifecycleRegisterObserver();
+			lifecycle.BeforeDestroy();
+			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.BeforeDest);
+		}
+
+		[Test]
+		public void LifecycleObserverAfterDestroyed()
+		{
+			LifecycleRegisterObserver();
+			lifecycle.Destroyed();
+			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.AfterDest);
+		}
+
+		[Test]
+		public void LifecycleUnregisterObserver()
+		{
+			LifecycleRegisterObserver();
+			lifecycle.UnregisterObserver(lifecycleObserver);
+
+			lifecycle.Initialized();
+
+			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.Initial);
+
+		}
 
 
     }

@@ -45,9 +45,6 @@ namespace NanoDI
 
 		public static Scope GetScope(string scopeName)
 		{
-			if (scopeName == null)
-				return Scope.Singleton;
-
 			try
 			{
 				return (Scope)Enum.Parse(typeof(Scope), scopeName, true);
