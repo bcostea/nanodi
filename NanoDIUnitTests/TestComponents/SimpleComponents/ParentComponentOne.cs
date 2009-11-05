@@ -27,5 +27,7 @@ namespace NanoDIUnitTests.TestComponents.SimpleComponents
             get { return prototypeComponent.Content; }
             set { prototypeComponent.Content = value; }
         }
+
+		public string Dummy { get { return dummyField; } }
     }
 }

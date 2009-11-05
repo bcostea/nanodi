@@ -103,7 +103,7 @@ namespace NanoDIUnitTests
             parentComponentOne = (IParentComponent)applicationContext.GetComponent("invalidComponent");
         }
 
-        [TearDown]
+		[TearDown]
         public void Teardown()
         {
             applicationContext.Destroy();

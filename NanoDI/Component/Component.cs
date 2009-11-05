@@ -35,6 +35,14 @@ namespace NanoDI.Component
 
 		List<ComponentField> fields = new List<ComponentField>();
 
+		public Component(string name, Type type, Scope scope, List<ComponentField> fields)
+		{
+			this.name = name;
+			this.type = type;
+			this.scope = scope;
+			this.fields = fields;
+		}
+
 		public Component(string name, Type type, Scope scope)
 		{
 			this.name = name;

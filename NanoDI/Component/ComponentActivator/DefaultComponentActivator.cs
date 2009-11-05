@@ -47,17 +47,8 @@ namespace NanoDI.Component.ComponentActivator
             if (Scope.Singleton.Equals(component.Scope) && componentCache.Contains(component))
                 return componentCache.Get(component);
 
-            object newInstance = instantiateComponent(component);
-                    
-            switch (component.Scope)
-            {
-                case Scope.Singleton:
-                    return newInstance;
-                case Scope.Prototype:
-                    return newInstance;
-                default:
-                    throw new CompositionException();
-            }
+            return instantiateComponent(component);
+      
 		}
 
         object instantiateComponent(IComponent component)

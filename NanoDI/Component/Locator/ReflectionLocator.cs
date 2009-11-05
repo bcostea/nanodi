@@ -51,10 +51,10 @@ namespace NanoDI.Component.Locator
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (Assembly asm in assemblies)
             {
-                IEnumerable<Type> asmTypes = from t in asm.GetTypes()
-                                             where t.IsClass &&
-                                                 (t.Namespace != null && t.Namespace.StartsWith(targetNamespace))
-                                             select t;
+                IEnumerable<Type> asmTypes = from type in asm.GetTypes()
+                                             where type.IsClass &&
+                                                 (type.Namespace != null && type.Namespace.StartsWith(targetNamespace))
+                                             select type;
                 types.AddRange(asmTypes);
             }
 
@@ -63,42 +63,28 @@ namespace NanoDI.Component.Locator
 
         public List<IComponent> LocateInTypes(Type[] types)
         {
-            List<IComponent> components = new List<IComponent>();
+           
+			IEnumerable<Component> components = 
+				from type in types
+					where type.GetCustomAttributes(typeof(ComponentAttribute), true).Length > 0
+						from attribute in type.GetCustomAttributes(typeof(ComponentAttribute), true)
+					select new Component(((ComponentAttribute)attribute).Name,
+										 type, 
+										 ((ComponentAttribute)attribute).Scope, 
+										 getInjectableFields(type));
 
-            foreach (Type type in types)
-            {
-                foreach (Attribute attr in type.GetCustomAttributes(true))
-                {
-                    ComponentAttribute componentAttr = attr as ComponentAttribute;
-					if (componentAttr != null)
-                    {
-                        if (log.IsDebugEnabled())
-							log.Debug("Component located " + componentAttr.Name);
+			return components.ToList().ConvertAll(new Converter<Component, IComponent>(component => component));      
 
-						Component component = new Component(componentAttr.Name, type, componentAttr.Scope);
-						component.Fields = getInjectableFields(type);
-                        components.Add(component);
-
-                    }
-                }
-            }
-            return components;
-        }
+		}
 
 		List<ComponentField> getInjectableFields(Type type)
 		{
-			List<ComponentField> fields = new List<ComponentField>();
+			IEnumerable<ComponentField> fields = 
+				from possibleDependencyField in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+					where fieldIsInjectable(possibleDependencyField)
+					select new ComponentField(possibleDependencyField.Name);
 
-			foreach (FieldInfo possibleDependencyField in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
-			{
-				if(fieldIsInjectable(possibleDependencyField))
-				{
-					fields.Add(new ComponentField(possibleDependencyField.Name));
-				}
-
-			}
-
-			return fields;
+			return fields.ToList();
 		}
 
 		Boolean fieldIsInjectable(FieldInfo fieldInfo)

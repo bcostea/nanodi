@@ -15,13 +15,6 @@ namespace NanoDI.Tooling.Logging
 
         private static readonly LogFactory instance = new LogFactory();
 
-        public static LogFactory Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
 
         LogFactory()
         {

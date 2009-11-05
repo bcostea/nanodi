@@ -26,11 +26,5 @@ namespace NanoDI.Exceptions
         {
 
         }
-        protected CompositionException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-
-        }
-
     }
 }

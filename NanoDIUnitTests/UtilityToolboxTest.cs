@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using NanoDI;
+using NanoDI.Attributes;
 
 namespace NanoDIUnitTests
 {
@@ -23,5 +24,33 @@ namespace NanoDIUnitTests
         {
             utilityToolbox.IsDebugEnabled();
         }
+
+		[Test]
+		public void GetTypeTest()
+		{
+			Type type = UtilityToolbox.GetType("NanoDIUnitTests.UtilityToolboxTest");
+			Assert.AreEqual(type, typeof(UtilityToolboxTest));
+		}
+
+		[Test]
+		public void GetScope()
+		{
+			Scope scope = UtilityToolbox.GetScope("Prototype");
+			Assert.AreEqual(scope, Scope.Prototype);
+		}
+
+		[Test]
+		public void GetScopeFailed() 
+		{
+			Scope scope = UtilityToolbox.GetScope("InvalidScope");
+			Assert.AreEqual(scope, Scope.Singleton);
+		}
+
+		[Test]
+		public void GetScopeNullFailed()
+		{
+			Scope scope = UtilityToolbox.GetScope(null);
+			Assert.AreEqual(scope, Scope.Singleton);
+		}
     }
 }
