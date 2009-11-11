@@ -23,7 +23,7 @@
 
 using System;
 
-namespace NanoDI.Attributes
+namespace Ndi.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class ComponentAttribute : Attribute

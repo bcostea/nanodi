@@ -1,7 +1,7 @@
-﻿using NanoDI.Attributes;
+﻿using Ndi.Attributes;
 using System;
 
-namespace NanoDI.Tooling.Command.Attributes
+namespace Ndi.Tooling.Command.Attributes
 {
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class CommandAttribute : ComponentAttribute

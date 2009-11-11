@@ -25,10 +25,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NanoDI.Exceptions;
-using NanoDI.Attributes;
+using Ndi.Exceptions;
+using Ndi.Attributes;
 
-namespace NanoDI.Component.Cache
+namespace Ndi.Component.Cache
 {
     class DefaultComponentCache:IComponentCache
     {

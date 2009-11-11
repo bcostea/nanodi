@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using NanoDI.Tooling.Logging;
+using Ndi.Tooling.Logging;
 
-namespace NanoDI.Component.Locator
+namespace Ndi.Component.Locator
 {
 	class XmlLocator : ILocator
 	{

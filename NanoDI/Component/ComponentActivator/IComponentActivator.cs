@@ -23,7 +23,7 @@
 
 using System;
 
-namespace NanoDI.Component.ComponentActivator
+namespace Ndi.Component.ComponentActivator
 {
 	interface IComponentActivator
 	{

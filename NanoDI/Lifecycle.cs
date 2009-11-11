@@ -1,8 +1,8 @@
 ﻿using System;
-using NanoDI.Exceptions;
+using Ndi.Exceptions;
 using System.Collections.Generic;
 
-namespace NanoDI
+namespace Ndi
 {
     public sealed class Lifecycle
     {

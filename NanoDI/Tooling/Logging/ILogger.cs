@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NanoDI.Tooling.Logging
+namespace Ndi.Tooling.Logging
 {
     public interface ILogger
     {

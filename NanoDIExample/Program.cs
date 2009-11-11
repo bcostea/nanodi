@@ -23,9 +23,9 @@
 
 using System;
 
-using NanoDI;
+using Ndi;
 
-namespace NanoDIExample
+namespace NdiExample
 {
     class Program
     {

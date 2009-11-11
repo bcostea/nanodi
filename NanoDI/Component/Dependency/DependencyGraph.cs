@@ -24,9 +24,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NanoDI.Exceptions;
+using Ndi.Exceptions;
 
-namespace NanoDI.Component.Dependency
+namespace Ndi.Component.Dependency
 {
     class DependencyGraph
     {

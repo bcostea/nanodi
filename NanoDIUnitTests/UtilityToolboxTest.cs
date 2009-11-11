@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using NanoDI;
-using NanoDI.Attributes;
+using Ndi;
+using Ndi.Attributes;
 
-namespace NanoDIUnitTests
+namespace NdiUnitTests
 {
     [TestFixture]
     class UtilityToolboxTest
@@ -28,7 +28,7 @@ namespace NanoDIUnitTests
 		[Test]
 		public void GetTypeTest()
 		{
-			Type type = UtilityToolbox.GetType("NanoDIUnitTests.UtilityToolboxTest");
+			Type type = UtilityToolbox.GetType("NdiUnitTests.UtilityToolboxTest");
 			Assert.AreEqual(type, typeof(UtilityToolboxTest));
 		}
 

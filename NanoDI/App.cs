@@ -1,10 +1,10 @@
 ﻿using System;
 
 [assembly: CLSCompliant(true)]
-namespace NanoDI
+namespace Ndi
 {
 
-	class App
+	public class App
 	{
 
 		#region Singleton

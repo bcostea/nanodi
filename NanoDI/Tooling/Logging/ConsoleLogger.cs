@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace NanoDI.Tooling.Logging
+namespace Ndi.Tooling.Logging
 {
     public class ConsoleLogger : ILogger
     {

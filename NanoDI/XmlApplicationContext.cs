@@ -1,13 +1,13 @@
 ﻿using System;
-using NanoDI;
-using NanoDI.Component.ComponentActivator;
-using NanoDI.Component.Locator;
-using NanoDI.Component.Registry;
-using NanoDI.Container;
-using NanoDI.Exceptions;
-using NanoDI.Tooling.Logging;
+using Ndi;
+using Ndi.Component.ComponentActivator;
+using Ndi.Component.Locator;
+using Ndi.Component.Registry;
+using Ndi.Container;
+using Ndi.Exceptions;
+using Ndi.Tooling.Logging;
 
-namespace NanoDI
+namespace Ndi
 {
 	public class XmlApplicationContext : AbstractApplicationContext
 	{

@@ -23,7 +23,7 @@
 
 using System;
 
-namespace NanoDI.Container
+namespace Ndi.Container
 {
     internal interface IMutableContainer:IContainer
     {

@@ -23,10 +23,10 @@
 
 using System;
 
-using NanoDI.Attributes;
-using NanoDIExample.Dependencies;
+using Ndi.Attributes;
+using NdiExample.Dependencies;
 
-namespace NanoDIExample
+namespace NdiExample
 {
     /**
      * We declare this as a component using the NanoDI.Attributes.Component attribute

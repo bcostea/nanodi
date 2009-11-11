@@ -25,13 +25,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using NanoDI.Exceptions;
-using NanoDI.Component.Dependency;
-using NanoDI.Container;
-using NanoDI.Component.ComponentActivator;
-using NanoDI.Tooling.Logging;
+using Ndi.Exceptions;
+using Ndi.Component.Dependency;
+using Ndi.Container;
+using Ndi.Component.ComponentActivator;
+using Ndi.Tooling.Logging;
 
-namespace NanoDI.Component.Registry
+namespace Ndi.Component.Registry
 {
     class DefaultComponentRegistry : IComponentRegistry
     {
@@ -99,6 +99,7 @@ namespace NanoDI.Component.Registry
         {
             foreach (IComponent component in components)
             {
+				validateComponent(component);
                 extractAndAddDependencies(component);
             }
         }
@@ -111,6 +112,15 @@ namespace NanoDI.Component.Registry
 				addComponentDependencyIfValid(component, possibleDependencyField);
 			}
         }
+
+		void validateComponent(IComponent component)
+		{
+			if (component != null)
+			{
+				if (component.Name == null || component.Name.Length < 1 || component.Type == null)
+					throw new CompositionException();
+			}
+		}
 
         void addComponentDependencyIfValid(IComponent parentComponent, FieldInfo fieldInfo)
         {

@@ -23,9 +23,9 @@
 
 using System;
 
-using NanoDI.Attributes;
+using Ndi.Attributes;
 
-namespace NanoDIExample.Dependencies
+namespace NdiExample.Dependencies
 {
     [Component("dependencyTwo")]
     class DependencyTwo:IDependency

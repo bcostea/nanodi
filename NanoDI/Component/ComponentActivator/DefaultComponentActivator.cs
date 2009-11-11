@@ -22,14 +22,14 @@
 #endregion
 
 using System;
-using NanoDI.Attributes;
-using NanoDI.Component.Registry;
+using Ndi.Attributes;
+using Ndi.Component.Registry;
 using System.Collections.Generic;
 using System.Reflection;
-using NanoDI.Exceptions;
-using NanoDI.Component.Cache;
+using Ndi.Exceptions;
+using Ndi.Component.Cache;
 
-namespace NanoDI.Component.ComponentActivator
+namespace Ndi.Component.ComponentActivator
 {
 	class DefaultComponentActivator : IComponentActivator
 	{
