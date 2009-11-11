@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NanoDIUnitTests.TestComponents.SimpleComponents
+namespace NdiUnitTests.TestComponents.SimpleComponents
 {
     class ChildComponent:IChildComponent
     {

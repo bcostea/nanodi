@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using System.Diagnostics;
-using NanoDI.Attributes;
-using NanoDI.Tooling.Logging;
+using Ndi.Attributes;
+using Ndi.Tooling.Logging;
 
-namespace NanoDI
+namespace Ndi
 {
 	public class UtilityToolbox
 	{
@@ -45,19 +45,23 @@ namespace NanoDI
 
 		public static Scope GetScope(string scopeName)
 		{
-			try
-			{
-				return (Scope)Enum.Parse(typeof(Scope), scopeName, true);
-			}
-			catch (Exception e)
-			{
-				if (log.IsDebugEnabled())
-				{
-					log.Debug(e.Message);
-				}
+			Scope scope = Scope.Singleton;
 
-				return Scope.Singleton;
+			if (scopeName != null)
+			{
+				try
+				{
+					return (Scope)Enum.Parse(typeof(Scope), scopeName, true);
+				}
+				catch (Exception e)
+				{
+					if (log.IsDebugEnabled())
+					{
+						log.Debug(e.Message);
+					}
+				}
 			}
+			return scope;
 		}
 
 	}

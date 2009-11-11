@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NanoDI.Attributes;
+using Ndi.Attributes;
 
-namespace NanoDIUnitTests.TestComponents.SimpleComponents
+namespace NdiUnitTests.TestComponents.SimpleComponents
 {
     [Component("singletonComponent")]
     class ChildSingletonComponent:ChildComponent

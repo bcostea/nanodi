@@ -27,16 +27,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-using NanoDI.Attributes;
-using NanoDI.Component;
-using NanoDI.Component.ComponentActivator;
-using NanoDI.Component.Locator;
-using NanoDI.Component.Registry;
-using NanoDI.Component.Dependency;
-using NanoDI.Exceptions;
-using NanoDI.Component.Cache;
+using Ndi.Attributes;
+using Ndi.Component;
+using Ndi.Component.ComponentActivator;
+using Ndi.Component.Locator;
+using Ndi.Component.Registry;
+using Ndi.Component.Dependency;
+using Ndi.Exceptions;
+using Ndi.Component.Cache;
 
-namespace NanoDI.Container
+namespace Ndi.Container
 {
 	class DefaultContainer : IMutableContainer
 	{

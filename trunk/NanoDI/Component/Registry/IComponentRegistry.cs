@@ -24,7 +24,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NanoDI.Component.Registry
+namespace Ndi.Component.Registry
 {
     interface IComponentRegistry
     {

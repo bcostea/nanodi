@@ -1,10 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
-using NanoDI;
-using NanoDIUnitTests.TestComponents.SimpleComponents;
-using NanoDIUnitTests.TestComponents.CircularDependencies;
+using Ndi;
+using NdiUnitTests.TestComponents.SimpleComponents;
+using NdiUnitTests.TestComponents.CircularDependencies;
 
-namespace NanoDIUnitTests
+namespace NdiUnitTests
 {
 
 
@@ -40,7 +40,7 @@ namespace NanoDIUnitTests
         
 
         [Test]
-        [ExpectedException("NanoDI.Exceptions.CompositionException")]
+        [ExpectedException("Ndi.Exceptions.CompositionException")]
         public void ApplicationContext_GetComponentFailed()
         {
             applicationContext.Destroy();
@@ -97,7 +97,7 @@ namespace NanoDIUnitTests
         }
 
         [Test]
-        [ExpectedException("NanoDI.Exceptions.InvalidComponentException")]
+        [ExpectedException("Ndi.Exceptions.InvalidComponentException")]
         public void ApplicationContext_GetComponentInvalid()
         {
             parentComponentOne = (IParentComponent)applicationContext.GetComponent("invalidComponent");

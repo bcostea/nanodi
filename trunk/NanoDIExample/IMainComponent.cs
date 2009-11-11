@@ -23,7 +23,7 @@
 
 using System;
 
-namespace NanoDIExample
+namespace NdiExample
 {
     interface IMainComponent
     {

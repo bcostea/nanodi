@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NanoDI.Tooling.Command
+namespace Ndi.Tooling.Command
 {
     public interface ICommand    
     {

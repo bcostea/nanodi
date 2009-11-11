@@ -26,7 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NanoDI.Component.Cache
+namespace Ndi.Component.Cache
 {
     interface IComponentCache
     {

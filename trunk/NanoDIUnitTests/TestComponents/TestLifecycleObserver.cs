@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NanoDI;
+using Ndi;
 
-namespace NanoDIUnitTests.TestComponents
+namespace NdiUnitTests.TestComponents
 {
 	class TestLifecycleObserver:ILifecycleObserver
 	{

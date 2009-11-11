@@ -24,7 +24,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NanoDI.Component.Locator
+namespace Ndi.Component.Locator
 {
     interface ILocator
     {

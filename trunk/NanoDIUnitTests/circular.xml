@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <components>
-	<component Name="dependencyOne" Type="NanoDIUnitTests.TestComponents.CircularDependencies.DependencyOne"/>
-	<component Name="dependencyTwo" Type="NanoDIUnitTests.TestComponents.CircularDependencies.DependencyTwo"/>
+	<component Name="dependencyOne" Type="NdiUnitTests.TestComponents.CircularDependencies.DependencyOne"/>
+	<component Name="dependencyTwo" Type="NdiUnitTests.TestComponents.CircularDependencies.DependencyTwo"/>
 </components>

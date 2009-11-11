@@ -23,9 +23,9 @@
 
 using System;
 using System.Collections.Generic;
-using NanoDI.Attributes;
+using Ndi.Attributes;
 
-namespace NanoDI.Component
+namespace Ndi.Component
 {
     interface IComponent
     {

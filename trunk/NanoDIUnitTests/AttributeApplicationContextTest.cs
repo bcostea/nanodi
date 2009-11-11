@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using NanoDI;
+using Ndi;
 
-namespace NanoDIUnitTests
+namespace NdiUnitTests
 {
 	[TestFixture()]
 	class AttributeApplicationContextTest:AbstractApplicationContextTest
@@ -13,7 +13,7 @@ namespace NanoDIUnitTests
 		[SetUp]
 		public override void Setup()
 		{
-			applicationContext = new AttributeApplicationContext("NanoDIUnitTests.TestComponents.SimpleComponents");
+			applicationContext = new AttributeApplicationContext("NdiUnitTests.TestComponents.SimpleComponents");
 		}
 
 		[Test]
@@ -21,7 +21,7 @@ namespace NanoDIUnitTests
 		{
 			ApplicationContext_Destroy();
 
-			applicationContext.Initialize("NanoDIUnitTests.TestComponents.SimpleComponents");
+			applicationContext.Initialize("NdiUnitTests.TestComponents.SimpleComponents");
 			applicationContext.Lifecycle.InitializedRequired();
 		}
 
@@ -29,7 +29,7 @@ namespace NanoDIUnitTests
 		public override void ApplicationContext_GetComponentCircularDependency()
 		{
 			ApplicationContext_Destroy();
-			applicationContext.Initialize("NanoDIUnitTests.TestComponents.CircularDependencies");
+			applicationContext.Initialize("NdiUnitTests.TestComponents.CircularDependencies");
 		}
 
 

@@ -1,9 +1,9 @@
 ﻿using System;
-using NanoDI;
+using Ndi;
 using NUnit.Framework;
-using NanoDIUnitTests.TestComponents;
+using NdiUnitTests.TestComponents;
 
-namespace NanoDIUnitTests
+namespace NdiUnitTests
 {
     [TestFixture()]
     class LifecycleTest
@@ -24,7 +24,7 @@ namespace NanoDIUnitTests
         }
 
         [Test]
-        [ExpectedException("NanoDI.Exceptions.CompositionException")]
+        [ExpectedException("Ndi.Exceptions.CompositionException")]
         public void Lifecycle_NotInitializedFailed()
         {
             lifecycle.Initialized();
@@ -47,7 +47,7 @@ namespace NanoDIUnitTests
 
 
         [Test]
-        [ExpectedException("NanoDI.Exceptions.CompositionException")]
+        [ExpectedException("Ndi.Exceptions.CompositionException")]
         public void Lifecycle_InitializedRequiredFailed()
         {
             lifecycle.InitializedRequired();

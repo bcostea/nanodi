@@ -23,7 +23,7 @@
 
 using System;
 
-namespace NanoDIExample.Dependencies
+namespace NdiExample.Dependencies
 {
     interface IDependency
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NanoDI
+namespace Ndi
 {
     public interface ILifecycle
     {

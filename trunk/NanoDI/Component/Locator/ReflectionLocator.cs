@@ -23,12 +23,12 @@
 
 using System;
 using System.Collections.Generic;
-using NanoDI.Attributes;
+using Ndi.Attributes;
 using System.Reflection;
 using System.Linq;
-using NanoDI.Tooling.Logging;
+using Ndi.Tooling.Logging;
 
-namespace NanoDI.Component.Locator
+namespace Ndi.Component.Locator
 {
     class ReflectionLocator : ILocator
     {

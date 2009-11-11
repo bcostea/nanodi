@@ -1,8 +1,8 @@
 ﻿using System;
-using NanoDI.Attributes;
+using Ndi.Attributes;
 
 
-namespace NanoDIUnitTests.TestComponents.CircularDependencies
+namespace NdiUnitTests.TestComponents.CircularDependencies
 {
     [Component("dependencyTwo")]
     class DependencyTwo

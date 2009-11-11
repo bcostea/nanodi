@@ -8,8 +8,8 @@
     <ProjectGuid>{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NanoDIUnitTests</RootNamespace>
-    <AssemblyName>NanoDIUnitTests</AssemblyName>
+    <RootNamespace>NdiUnitTests</RootNamespace>
+    <AssemblyName>NdiUnitTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttributeApplicationContextTest.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="LifecycleTest.cs" />
     <Compile Include="AbstractApplicationContextTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,9 +65,9 @@
     <Compile Include="XmlApplicationContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NanoDI\NanoDI.csproj">
+    <ProjectReference Include="..\NanoDI\Ndi.csproj">
       <Project>{5F35E71C-7948-42A5-A5B1-07821FE089FD}</Project>
-      <Name>NanoDI</Name>
+      <Name>Ndi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +78,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="components.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="invalidtype.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

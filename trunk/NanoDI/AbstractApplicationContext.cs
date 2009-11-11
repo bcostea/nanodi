@@ -23,15 +23,15 @@
 
 using System;
 using System.Reflection;
-using NanoDI;
-using NanoDI.Component.ComponentActivator;
-using NanoDI.Component.Locator;
-using NanoDI.Component.Registry;
-using NanoDI.Container;
-using NanoDI.Exceptions;
+using Ndi;
+using Ndi.Component.ComponentActivator;
+using Ndi.Component.Locator;
+using Ndi.Component.Registry;
+using Ndi.Container;
+using Ndi.Exceptions;
 using System.Diagnostics;
 
-namespace NanoDI
+namespace Ndi
 {
 	public abstract class AbstractApplicationContext : IApplicationContext
     {

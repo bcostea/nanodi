@@ -25,7 +25,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace NanoDI.Container
+namespace Ndi.Container
 {
     internal interface IContainer:ILifecycle
     {

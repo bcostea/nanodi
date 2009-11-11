@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NanoDI.Component.Locator;
+using Ndi.Component.Locator;
 
-namespace NanoDI.Tooling.Command.CommandLocator
+namespace Ndi.Tooling.Command.CommandLocator
 {
     interface ICommandLocator : ILocator
     {

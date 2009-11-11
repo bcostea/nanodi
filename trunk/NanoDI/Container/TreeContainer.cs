@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using NanoDI.Component.Locator;
-using NanoDI.Exceptions;
+using Ndi.Component.Locator;
+using Ndi.Exceptions;
 
-namespace NanoDI.Container
+namespace Ndi.Container
 {
     class TreeContainer : DefaultContainer
     {

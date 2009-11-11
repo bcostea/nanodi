@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace NanoDI.Exceptions
+namespace Ndi.Exceptions
 {
     /**
      *   This exception is thrown when: 

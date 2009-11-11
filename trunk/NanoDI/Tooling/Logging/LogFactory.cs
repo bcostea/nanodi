@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Diagnostics;
 
-namespace NanoDI.Tooling.Logging
+namespace Ndi.Tooling.Logging
 {
     public sealed class LogFactory
     {

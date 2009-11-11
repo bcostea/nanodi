@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using NanoDI;
+using Ndi;
 
-namespace NanoDIUnitTests
+namespace NdiUnitTests
 {
 	[TestFixture()]
 	class XmlApplicationContextTest:AbstractApplicationContextTest
@@ -41,11 +41,21 @@ namespace NanoDIUnitTests
 		}
 
 		[Test]
-		[ExpectedException("NanoDI.Exceptions.ComponentAlreadyExistsException")]
+		[ExpectedException("Ndi.Exceptions.ComponentAlreadyExistsException")]
 		public void ApplicationContextNameOverlap()
 		{
 			ApplicationContext_Destroy();
 			applicationContext = new XmlApplicationContext("nameoverlap.xml");
 		}
+
+		[Test]
+		[ExpectedException("Ndi.Exceptions.CompositionException")]
+		public void ApplicationContextInvalidType()
+		{
+			ApplicationContext_Destroy();
+			applicationContext = new XmlApplicationContext("invalidtype.xml");
+		}
+
+
 	}
 }
