@@ -26,7 +26,7 @@ namespace Ndi
 		{
 			if (log.IsDebugEnabled())
 			{
-				log.Debug("Initializing attribute application context.");
+				log.Info("Initializing attribute application context.");
 			}
 
 			beforeInitialize();

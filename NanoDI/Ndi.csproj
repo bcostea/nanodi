@@ -97,6 +97,7 @@
     <Compile Include="Tooling\Plugin\PluginLocator\DirectoryPluginLocator.cs" />
     <Compile Include="Tooling\Plugin\PluginLocator\IPluginLocator.cs" />
     <Compile Include="Tooling\Plugin\PluginLocator\ReflectionPluginLocator.cs" />
+    <Compile Include="Tooling\Properties\PropertyManager\AbstractPropertyManager.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\DefaultPropertyManager.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\IPropertyManager.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\XMLPropertyManager.cs" />

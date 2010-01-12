@@ -1,14 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Ndi.Tooling.Properties.PropertyManager
 {
-	public interface IPropertyManager
+	class OSPropertyManager:
 	{
-		string GetProperty(string propertyName);
-
-		Boolean OSOverridesCustom { get; set; }
 	}
 }
