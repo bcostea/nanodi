@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppTest.cs" />
     <Compile Include="AttributeApplicationContextTest.cs" />
     <Compile Include="LifecycleTest.cs" />
     <Compile Include="AbstractApplicationContextTest.cs" />
@@ -53,6 +54,10 @@
     <Compile Include="TestComponents\CircularDependencies\DependencyOne.cs" />
     <Compile Include="TestComponents\CircularDependencies\DependencyTwo.cs" />
     <Compile Include="TestComponents\CircularDependencies\ICircularDependency.cs" />
+    <Compile Include="TestComponents\ConstructorInjection\ChildComponent.cs" />
+    <Compile Include="TestComponents\ConstructorInjection\SecondChildComponent.cs" />
+    <Compile Include="TestComponents\ConstructorInjection\ParentComponentWithConstructorThatRequiresChild.cs" />
+    <Compile Include="TestComponents\ConstructorInjection\ParentComponentWithConstructorThatRequiresChildAndOtherField.cs" />
     <Compile Include="TestComponents\SimpleComponents\ChildComponent.cs" />
     <Compile Include="TestComponents\SimpleComponents\ChildPrototypeComponent.cs" />
     <Compile Include="TestComponents\SimpleComponents\ChildSingletonComponent.cs" />
@@ -71,6 +76,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="constructorinjection.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="nameoverlap.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

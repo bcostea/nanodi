@@ -73,7 +73,7 @@ namespace Ndi.Container
 
 		public object GetComponent(string componentName)
 		{
-				IComponent component = componentRegistry.Get(componentName);
+				IComponent component = componentRegistry.GetComponent(componentName);
 				return componentActivator.GetInstance(component);
 		}
 
@@ -84,7 +84,7 @@ namespace Ndi.Container
 
 		public Boolean HasComponent(string componentName)
 		{
-			return componentRegistry.Contains(componentName);
+			return componentRegistry.ContainsComponent(componentName);
 		}
 	}
 }

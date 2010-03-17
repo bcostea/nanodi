@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Ndi.Tooling.Logging;
+using Ndi.Attributes;
 
 namespace Ndi.Component.Locator
 {
@@ -59,6 +60,13 @@ namespace Ndi.Component.Locator
 					ComponentField componentField = new ComponentField((string)fieldElement.Attribute("Name"));
 					fields.Add(componentField);
 				}
+
+                IEnumerable<XElement> xmlParameterElements = componentElement.Descendants("parameter");
+                foreach (XElement parameterElement in xmlParameterElements)
+                {
+                    ComponentField componentField = new ComponentField((string)parameterElement.Attribute("Name"), InjectMethod.Constructor);
+                    fields.Add(componentField);
+                }
 			}
 
 			return fields;

@@ -41,7 +41,6 @@ namespace Ndi
 
 		protected AbstractApplicationContext()
         {
-			Initialize();
         }
 
 		protected AbstractApplicationContext(string initializationParameter)
@@ -49,19 +48,13 @@ namespace Ndi
 			Initialize(initializationParameter);
         }
 
+        public abstract void Initialize();
 		public abstract void Initialize(string initializationParameter);
 		public abstract void InitializeContainer(string initializationParameter);
 
-        public void Initialize()
-        {
-            beforeInitialize();
-            InitializeContainer(null);
-            afterInitialize();
-        }
-
         public void Destroy()
         {
-			contextLifecycle.BeforeDestroy();
+            contextLifecycle.BeforeDestroy();
             container.Destroy();
 			contextLifecycle.Destroyed();
         }
@@ -76,6 +69,17 @@ namespace Ndi
 
 		protected void afterInitialize()
         {
+            // add to application
+            if (App.Instance.Context != null)
+            {
+                // merge treecontainers
+                //    App.Instance.Context.
+            }
+            else
+            {
+                App.Instance.Context = this;
+            }
+
 			contextLifecycle.Initialized();
         }
 

@@ -46,6 +46,11 @@ namespace NdiExample
         [Inject]
         IDependency dependencyThree = null;
 
+        public MainComponent()
+        {
+            start();
+        }
+
         public void start()
         {
             Console.WriteLine("Starting MainComponent");
