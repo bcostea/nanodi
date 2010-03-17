@@ -13,6 +13,12 @@ namespace Ndi
 	{
 		static ILogger log = LogFactory.GetLog(typeof(AttributeApplicationContext));
 
+        public AttributeApplicationContext()
+            : base()
+        {
+            Initialize();
+        }
+
 		public AttributeApplicationContext(string targetNamespace)
 			: base(targetNamespace)
 		{
@@ -43,5 +49,12 @@ namespace Ndi
 				container.Initialize(targetNamespace);
 			}
 		}
-	}
+
+        public override void Initialize()
+        {
+            beforeInitialize();
+            InitializeContainer(null);
+            afterInitialize();
+        }
+    }
 }

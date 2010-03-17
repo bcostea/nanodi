@@ -19,25 +19,9 @@ namespace NdiUnitTests
 
 		abstract public void Setup();
 
-		public abstract void ApplicationContext_InitializeWithSource();
-		public abstract void ApplicationContext_GetComponentCircularDependency();
-
-        [Test]
-        public void ApplicationContext_InitializeWithNoSource()
-        {
-            ApplicationContext_Destroy();
-
-            applicationContext.Initialize();
-            applicationContext.Lifecycle.InitializedRequired();
-        }
-
-        [Test]
-        public void ApplicationContext_Destroy()
-        {
-            applicationContext.Destroy();
-            applicationContext.Lifecycle.NotInitializedRequired();
-        }
-        
+        public abstract void ApplicationContext_Destroy();
+        public abstract void ApplicationContext_InitializeWithSource();
+		public abstract void ApplicationContext_GetComponentCircularDependency();    
 
         [Test]
         [ExpectedException("Ndi.Exceptions.CompositionException")]

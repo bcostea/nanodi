@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AbstractApplicationContext.cs" />
+    <Compile Include="Attributes\InjectMethod.cs" />
     <Compile Include="Component\ComponentField.cs" />
     <Compile Include="Component\Locator\XmlLocator.cs" />
     <Compile Include="Container\TreeContainer.cs" />

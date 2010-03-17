@@ -4,58 +4,80 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using Ndi;
+using NdiUnitTests.TestComponents.ConstructorInjection;
 
 namespace NdiUnitTests
 {
-	[TestFixture()]
-	class XmlApplicationContextTest:AbstractApplicationContextTest
-	{
-		[SetUp]
-		public override void Setup()
-		{
-			applicationContext = new XmlApplicationContext();
-		}
+    [TestFixture()]
+    class XmlApplicationContextTest : AbstractApplicationContextTest
+    {
+        [SetUp]
+        public override void Setup()
+        {
+            applicationContext = new XmlApplicationContext("components.xml");
+        }
 
-		[Test]
-		public override void ApplicationContext_InitializeWithSource()
-		{
-			ApplicationContext_Destroy();
+        [Test]
+        public override void ApplicationContext_InitializeWithSource()
+        {
+            applicationContext.Lifecycle.InitializedRequired();
+        }
 
-			applicationContext.Initialize("components.xml");
-			applicationContext.Lifecycle.InitializedRequired();
-		}
+        [Test]
+        public override void ApplicationContext_GetComponentCircularDependency()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("circular.xml");
+        }
 
-		[Test]
-		public override void ApplicationContext_GetComponentCircularDependency()
-		{
-			ApplicationContext_Destroy();
+        [Test]
+        public void XmlApplicationContextWithFile()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("circular.xml");
+        }
 
-			applicationContext.Initialize("circular.xml");
-		}
+        [Test]
+        [ExpectedException("Ndi.Exceptions.ComponentAlreadyExistsException")]
+        public void ApplicationContextNameOverlap()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("nameoverlap.xml");
+        }
 
-		[Test]
-		public void XmlApplicationContextWithFile()
-		{
-			ApplicationContext_Destroy();
-			applicationContext = new XmlApplicationContext("circular.xml");
-		}
+        [Test]
+        [ExpectedException("Ndi.Exceptions.CompositionException")]
+        public void ApplicationContextInvalidType()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("invalidtype.xml");
+        }
 
-		[Test]
-		[ExpectedException("Ndi.Exceptions.ComponentAlreadyExistsException")]
-		public void ApplicationContextNameOverlap()
-		{
-			ApplicationContext_Destroy();
-			applicationContext = new XmlApplicationContext("nameoverlap.xml");
-		}
+        [Test]
+        public void ApplicationContext_ConstructorInjectionWorks()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("constructorinjection.xml");
 
-		[Test]
-		[ExpectedException("Ndi.Exceptions.CompositionException")]
-		public void ApplicationContextInvalidType()
-		{
-			ApplicationContext_Destroy();
-			applicationContext = new XmlApplicationContext("invalidtype.xml");
-		}
+            Assert.IsNotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChild"));
+        }
+
+        [Test]
+        public void ApplicationContext_ConstructorInjectionWorksWithAdditionalFields()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("constructorinjection.xml");
+
+            Assert.IsNotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField"));
+            Assert.IsNotNull(((ParentComponentWithConstructorThatRequiresChildAndOtherField)applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField")).SecondChild);
+        }
 
 
-	}
+        [Test]
+        public override void ApplicationContext_Destroy()
+        {
+            applicationContext.Destroy();
+            applicationContext.Lifecycle.NotInitializedRequired();
+        }
+    }
 }

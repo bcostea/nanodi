@@ -29,8 +29,8 @@ namespace Ndi.Component.Registry
     interface IComponentRegistry
     {
         
-        Boolean Contains(string componentName);
-        IComponent Get(string componentName);
+        Boolean ContainsComponent(string componentName);
+        IComponent GetComponent(string componentName);
         void RegisterAll(List<IComponent> components);
 
         List<IComponent> GetComponentDependencies(IComponent component);

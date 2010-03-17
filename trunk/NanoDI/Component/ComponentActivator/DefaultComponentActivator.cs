@@ -26,13 +26,14 @@ using Ndi.Attributes;
 using Ndi.Component.Registry;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Linq;
 using Ndi.Exceptions;
 using Ndi.Component.Cache;
 
 namespace Ndi.Component.ComponentActivator
 {
-	class DefaultComponentActivator : IComponentActivator
-	{
+    class DefaultComponentActivator : IComponentActivator
+    {
         private IComponentRegistry componentRegistry;
         private IComponentCache componentCache;
 
@@ -42,51 +43,118 @@ namespace Ndi.Component.ComponentActivator
             this.componentCache = componentCache;
         }
 
-		public object GetInstance(IComponent component)
-		{
+        public object GetInstance(IComponent component)
+        {
             if (Scope.Singleton.Equals(component.Scope) && componentCache.Contains(component))
                 return componentCache.Get(component);
 
-            return instantiateComponent(component);
+            return createInstance(component);
+
+        }
       
-		}
-
-        object instantiateComponent(IComponent component)
+        private void instantiateAndApplyFields(IComponent component, object componentInstance)
         {
+            List<IComponent> dependencies = componentRegistry.GetComponentDependencies(component);
 
-            Type actualComponentType = component.Type;
-            var actualComponentInstance = Activator.CreateInstance(actualComponentType);
-
-            if (actualComponentType.AssemblyQualifiedName != null)
+            if (dependencies.Count > 0)
             {
-                List<IComponent> dependencies = componentRegistry.GetComponentDependencies(component);
-
-                if (dependencies.Count > 0)
+                foreach (IComponent dependentComponent in dependencies)
                 {
-                    foreach (IComponent dependentComponent in dependencies)
+                    // constructor parameters have already been applied
+                    if (!isConstructorParameter(component, dependentComponent))
                     {
-                        FieldInfo fieldInfo = actualComponentType.GetField(dependentComponent.Name, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+                        FieldInfo fieldInfo = component.Type.GetField(dependentComponent.Name, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
                         if (fieldInfo != null)
                         {
-                            object createdDependency = instantiateComponent(dependentComponent);
-                            fieldInfo.SetValue(actualComponentInstance, createdDependency);
+                            object createdDependency = GetInstance(dependentComponent);
+                            fieldInfo.SetValue(componentInstance, createdDependency);
                         }
-                        else
-                            throw new CompositionException();
                     }
                 }
+            }
+        }
 
-                if (Scope.Singleton.Equals(component.Scope))
-                {
-                    componentCache.Put(component, actualComponentInstance);
-                }
+        private bool isConstructorParameter(IComponent component, IComponent dependentComponent)
+        {
+            ConstructorInfo ctrInfo = getMatchingConstructor(component);
+            IEnumerable<string> parameterNames = from param in ctrInfo.GetParameters()
+                                                 select param.Name;
+            return parameterNames.ToList().Contains(dependentComponent.Name);
+        }
 
-                return actualComponentInstance;
+
+        object createInstance(IComponent component)
+        {
+            object componentInstance = null;
+
+            if (requiresConstructorInject(component))
+            {
+                ConstructorInfo ctrInfo = getMatchingConstructor(component);
+                object[] parameters = getInstantiatedConstructorParameters(ctrInfo);
+                componentInstance = ctrInfo.Invoke(parameters);
             }
             else
-                throw new InvalidComponentException(component.Name);
+            {
+                componentInstance = Activator.CreateInstance(component.Type);
+            }
+
+            instantiateAndApplyFields(component, componentInstance);
+            addToCache(component, componentInstance);
+            return componentInstance;
         }
-	}
+
+        private void addToCache(IComponent component, object componentInstance)
+        {
+            if (Scope.Singleton.Equals(component.Scope))
+            {
+                componentCache.Put(component, componentInstance);
+            }
+        }
+
+        private object[] getInstantiatedConstructorParameters(ConstructorInfo ctrInfo)
+        {
+
+            List<object> parameters = new List<object>();
+            foreach (ParameterInfo paramInfo in ctrInfo.GetParameters())
+            {
+                parameters.Add(GetInstance(componentRegistry.GetComponent(paramInfo.Name)));
+            }
+            return parameters.ToArray();
+        }
+
+        private ConstructorInfo getMatchingConstructor(IComponent component)
+        {
+            ConstructorInfo matchingConstructor=null;
+
+            IEnumerable<string> injectionParameterNames = from componentField in component.Fields
+                                                          where InjectMethod.Constructor.Equals(componentField.InjectMethod)
+                                                          select componentField.Name;
+
+            foreach (ConstructorInfo ctrInfo in component.Type.GetConstructors())
+            {
+                IEnumerable<string> parameterNames = from param in ctrInfo.GetParameters()
+                                                     where !injectionParameterNames.ToList().Contains(param.Name)
+                                                     select param.Name;
+                if (parameterNames.Count() > 0)
+                    continue;
+                else
+                    matchingConstructor = ctrInfo;
+            }
+
+            return matchingConstructor;
+        }
+
+        bool requiresConstructorInject(IComponent component)
+        {
+            foreach (ComponentField field in component.Fields)
+            {
+                if (InjectMethod.Constructor.Equals(field.InjectMethod))
+                    return true;
+            }
+            return false;
+        }
+
+    }
 
 
 }

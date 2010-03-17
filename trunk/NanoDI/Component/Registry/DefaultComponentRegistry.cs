@@ -51,16 +51,6 @@ namespace Ndi.Component.Registry
             registerDependenciesForComponents(components);
         }
 
-        /// <summary>
-        /// Registers a component and it's dependencies
-        /// </summary>
-        /// <param name="component">A component</param>
-        public void RegisterComponent(IComponent component)
-        {
-            registerComponent(component.Name, component);
-            extractAndAddDependencies(component);
-        }
-
         public void UnregisterAll()
         {
             if (log.IsDebugEnabled())
@@ -143,7 +133,13 @@ namespace Ndi.Component.Registry
                 log.Debug( "Validating field " + fieldInfo.Name);
             
             return registeredComponents.ContainsKey(fieldInfo.Name)
-                && componentHasInterface(registeredComponents[fieldInfo.Name], fieldInfo.FieldType);
+                && (componentHasInterface(registeredComponents[fieldInfo.Name], fieldInfo.FieldType) || 
+                    componentHasSameType(registeredComponents[fieldInfo.Name], fieldInfo.FieldType));
+        }
+
+        private bool componentHasSameType(IComponent iComponent, Type type)
+        {
+            return type.Equals(iComponent.Type);    
         }
 
 
@@ -168,14 +164,12 @@ namespace Ndi.Component.Registry
             List<IComponent> dependencies = new List<IComponent>();
             List<string> stringDependencies = dependencyGraph.GetDependencies(component.Name);
 
-            foreach (string dep in stringDependencies)
+            foreach (string dependencyName in stringDependencies)
             {
-                if (Contains(dep))
+                if (ContainsComponent(dependencyName))
                 {
-                    dependencies.Add(Get(dep));
+                    dependencies.Add(GetComponent(dependencyName));
                 }
-                else
-                    throw new CompositionException();
             }
 
             return dependencies;
@@ -187,14 +181,14 @@ namespace Ndi.Component.Registry
             return componentType.GetInterfaces();
         }
 
-        public bool Contains(string componentName)
+        public bool ContainsComponent(string componentName)
         {
             return registeredComponents.ContainsKey(componentName);
         }
 
-        public IComponent Get(string componentName)
+        public IComponent GetComponent(string componentName)
         {
-            if (Contains(componentName))
+            if (ContainsComponent(componentName))
                 return registeredComponents[componentName];
             else
                 throw new InvalidComponentException(componentName);

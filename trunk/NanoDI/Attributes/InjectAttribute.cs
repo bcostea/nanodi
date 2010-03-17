@@ -25,8 +25,13 @@ using System;
 
 namespace Ndi.Attributes
 {
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Constructor)]
     public sealed class InjectAttribute : Attribute
     {
+        private InjectMethod injectMethod;
+        public InjectAttribute() { this.injectMethod = InjectMethod.None; }
+        public InjectAttribute(InjectMethod injectMethod) { this.injectMethod = injectMethod; }
+
+        public InjectMethod InjectMethod { get { return this.injectMethod; } }
     }
 }

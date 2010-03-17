@@ -15,6 +15,7 @@ namespace Ndi
 
 		public XmlApplicationContext(): base()
 		{
+            Initialize();
 		}
 
 		public XmlApplicationContext(string fileName)
@@ -47,5 +48,10 @@ namespace Ndi
 				container.Initialize(fileName);
 			}
 		}
-	}
+
+        public override void Initialize()
+        {
+           
+        }
+    }
 }

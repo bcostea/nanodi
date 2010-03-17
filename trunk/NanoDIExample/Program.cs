@@ -32,7 +32,7 @@ namespace NdiExample
         static void Main(string[] args)
         {
 
-            AbstractApplicationContext appCtx = new AttributeApplicationContext("NanoDIExample");
+            AbstractApplicationContext appCtx = new AttributeApplicationContext("NdiExample");
 
             IMainComponent mainComponent = (IMainComponent) appCtx.GetComponent("mainComponent");
 
