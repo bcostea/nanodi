@@ -36,8 +36,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,7 +45,6 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="AbstractApplicationContext.cs" />
-    <Compile Include="Attributes\InjectMethod.cs" />
     <Compile Include="Component\ComponentField.cs" />
     <Compile Include="Component\Locator\XmlLocator.cs" />
     <Compile Include="Container\TreeContainer.cs" />
@@ -80,14 +77,28 @@
     <Compile Include="Exceptions\CompositionException.cs" />
     <Compile Include="Exceptions\InvalidComponentException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tooling\Command\Attributes\CommandAttribute.cs" />
+    <Compile Include="Tooling\Command\CommandLocator\ICommandLocator.cs" />
+    <Compile Include="Tooling\Command\CommandLocator\ReflectionCommandLocator.cs" />
+    <Compile Include="Tooling\Command\CommandLocator\XMLCommandLocator.cs" />
+    <Compile Include="Tooling\Command\ICommand.cs" />
+    <Compile Include="Tooling\I18n\AssemblyMessageSource.cs" />
+    <Compile Include="Tooling\I18n\FileMessageSource.cs" />
+    <Compile Include="Tooling\I18n\HttpMessageSource.cs" />
+    <Compile Include="Tooling\I18n\IMessageSource.cs" />
+    <Compile Include="Tooling\I18n\IMessageSourceReader.cs" />
+    <Compile Include="Tooling\I18n\PropertyMessageSourceReader.cs" />
+    <Compile Include="Tooling\I18n\ResourceMessageSourceReader.cs" />
     <Compile Include="Tooling\Logging\ConsoleLogger.cs" />
     <Compile Include="Tooling\Logging\LogFactory.cs" />
     <Compile Include="Tooling\Logging\ILogger.cs" />
-    <Compile Include="Tooling\Properties\PropertyManager\AbstractPropertyManager.cs" />
+    <Compile Include="Tooling\Plugin\Attributes\PluginAttribute.cs" />
+    <Compile Include="Tooling\Plugin\IPlugin.cs" />
+    <Compile Include="Tooling\Plugin\PluginLocator\DirectoryPluginLocator.cs" />
+    <Compile Include="Tooling\Plugin\PluginLocator\IPluginLocator.cs" />
+    <Compile Include="Tooling\Plugin\PluginLocator\ReflectionPluginLocator.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\DefaultPropertyManager.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\IPropertyManager.cs" />
-    <Compile Include="Tooling\Properties\PropertyManager\OSPropertyManager.cs" />
-    <Compile Include="Tooling\Properties\PropertyManager\PlainTextPropertyManager.cs" />
     <Compile Include="Tooling\Properties\PropertyManager\XMLPropertyManager.cs" />
     <Compile Include="UtilityToolbox.cs" />
     <Compile Include="XmlApplicationContext.cs" />

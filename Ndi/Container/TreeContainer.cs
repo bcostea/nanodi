@@ -1,13 +1,4 @@
-﻿/** 
- * This File is part of the NDI Library
- * Copyright 2009,2010 Bogdan COSTEA <bogdan.costea@gridpulse.com>
- * 
- * This library is free software, published under the terms of the LGPL version 2.1 or newer.
- * More info in the LICENSE.TXT file in the root of the project.
- * 
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Ndi.Component.Locator;
 using Ndi.Exceptions;
@@ -28,7 +19,7 @@ namespace Ndi.Container
             }
             else
             {
-                foreach (IMutableContainer childContainer in childContainers)
+                foreach (IContainer childContainer in childContainers)
                 {
                     if (childContainer.HasComponent(componentName))
                     {
@@ -49,9 +40,9 @@ namespace Ndi.Container
             }
         }
 
-        private Boolean componentIsInChildContainers(string componentName)
+        Boolean componentIsInChildContainers(string componentName)
         {
-            foreach (IMutableContainer childContainer in childContainers)
+            foreach (IContainer childContainer in childContainers)
             {
                 if (childContainer.HasComponent(componentName))
                 {
