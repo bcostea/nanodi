@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<components>
+  <component Name="childComponent" Type="NdiUnitTests.TestComponents.ConstructorInjection.ChildComponent" Scope="Prototype"/>
+  <component Name="secondChildComponent" Type="NdiUnitTests.TestComponents.ConstructorInjection.ChildComponent" Scope="Prototype"/>
+
+  <component Name="componentWhithoutSecondChildComponent" Type="NdiUnitTests.TestComponents.ConstructorInjection.ParentComponentWithConstructorThatRequiresChild">
+    <parameter Name="childComponent" />
+    <field Name="secondChildComponent" />
+  </component>
+
+</components>

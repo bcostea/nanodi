@@ -1,0 +1,93 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/f:State.cs" caret="289" fromTop="7" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Logging/f:LogFactory.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Logging/f:ILogger.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Attributes/f:ComponentAttribute.cs" caret="291" fromTop="8" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:UtilityToolboxTest.cs" caret="209" fromTop="11" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:LifecycleTest.cs" caret="148" fromTop="0" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AttributeApplicationContextTest.cs" caret="239" fromTop="11" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AppTest.cs" caret="63" fromTop="4" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AbstractApplicationContextTest.cs" caret="1200" fromTop="13" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:XmlApplicationContextTest.cs" caret="1564" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Registry/f:DefaultComponentRegistry.cs" caret="3824" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/f:XmlApplicationContext.cs" caret="1157" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Container/f:DefaultContainer.cs" caret="1229" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/f:App.cs" caret="379" fromTop="9" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/f:Lifecycle.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ILocator.cs" caret="422" fromTop="9" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Logging/f:ConsoleLogger.cs" caret="371" fromTop="0" />
+      <File id="E4D832B4-DF08-4932-944F-F07EDDE2800D/f:Class1.cs" caret="161" fromTop="9" />
+      <File id="D958A2D2-A9E5-4418-AFEA-A2FEA9D517D0/f:Class1.cs" caret="0" fromTop="0" />
+      <File id="F438C8DD-8441-43CE-99E7-03F2D1BFD665/f:Class1.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:IComponent.cs" caret="531" fromTop="8" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:XmlLocator.cs" caret="1497" fromTop="15" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ReflectionLocator.cs" caret="2220" fromTop="62" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:Component.cs" caret="558" fromTop="16" />
+      <File id="FA8B7160-1801-41C3-AD5D-171579E7D91E/f:Program.cs" caret="0" fromTop="0" />
+      <File id="FA8B7160-1801-41C3-AD5D-171579E7D91E/f:MainComponent.cs" caret="962" fromTop="12" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:ComponentActivator/f:DefaultComponentActivator.cs" caret="3439" fromTop="10" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:OSPropertyManager.cs" caret="298" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:PlainTextPropertyManager.cs" caret="338" fromTop="7" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:ComponentField.cs" caret="0" fromTop="0" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AppTest.cs" caret="0" fromTop="0" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:XmlApplicationContextTest.cs" caret="154" fromTop="7" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:UtilityToolboxTest.cs" caret="208" fromTop="11" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:LifecycleTest.cs" caret="148" fromTop="8" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AttributeApplicationContextTest.cs" caret="238" fromTop="11" />
+      <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AbstractApplicationContextTest.cs" caret="133" fromTop="8" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:XmlLocator.cs" caret="521" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/f:App.cs" caret="773" fromTop="28" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ILocator.cs" caret="422" fromTop="9" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:ComponentField.cs" caret="675" fromTop="3" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ReflectionLocator.cs" caret="4623" fromTop="6" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ReflectionLocator.cs" caret="4325" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ReflectionLocator.cs" caret="5050" fromTop="12" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ReflectionLocator.cs" caret="5011" fromTop="11" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:XmlLocator.cs" caret="1491" fromTop="15" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:XmlLocator.cs" caret="1602" fromTop="18" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:XmlLocator.cs" caret="588" fromTop="1" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:XmlLocator.cs" caret="709" fromTop="6" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:Component.cs" caret="954" fromTop="8" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:Component.cs" caret="558" fromTop="10" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:IComponent.cs" caret="531" fromTop="8" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:Locator/f:ReflectionLocator.cs" caret="2353" fromTop="9" />
+      <File id="FA8B7160-1801-41C3-AD5D-171579E7D91E/f:MainComponent.cs" caret="949" fromTop="10" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:OSPropertyManager.cs" caret="186" fromTop="3" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:OSPropertyManager.cs" caret="298" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:PlainTextPropertyManager.cs" caret="176" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:PlainTextPropertyManager.cs" caret="323" fromTop="4" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:ComponentField.cs" caret="312" fromTop="1" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:ComponentField.cs" caret="427" fromTop="9" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:ComponentField.cs" caret="542" fromTop="3" />
+    </RecentEdits>
+  </RecentFiles>
+  <UnitTestRunner>
+    <Providers>
+      <MSTest>False</MSTest>
+    </Providers>
+  </UnitTestRunner>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="IComponentField" priority="0" />
+      <Item value="IEnumerable" priority="0" />
+      <Item value="IPropertyManager" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="AddRange" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+</Configuration>
