@@ -1,14 +1,10 @@
-﻿/** 
- * This File is part of the NDI Library
- * Copyright 2009,2010 Bogdan COSTEA <bogdan.costea@gridpulse.com>
- * 
- * This library is free software, published under the terms of the LGPL version 2.1 or newer.
- * More info in the LICENSE.TXT file in the root of the project.
- * 
- */
-
+﻿using System;
+using Ndi;
+using Ndi.Component.ComponentActivator;
 using Ndi.Component.Locator;
+using Ndi.Component.Registry;
 using Ndi.Container;
+using Ndi.Exceptions;
 using Ndi.Tooling.Logging;
 
 namespace Ndi
@@ -16,12 +12,6 @@ namespace Ndi
 	public class AttributeApplicationContext : AbstractApplicationContext
 	{
 		static ILogger log = LogFactory.GetLog(typeof(AttributeApplicationContext));
-
-        public AttributeApplicationContext()
-            : base()
-        {
-            Initialize();
-        }
 
 		public AttributeApplicationContext(string targetNamespace)
 			: base(targetNamespace)
@@ -53,12 +43,5 @@ namespace Ndi
 				container.Initialize(targetNamespace);
 			}
 		}
-
-        public override void Initialize()
-        {
-            beforeInitialize();
-            InitializeContainer(null);
-            afterInitialize();
-        }
-    }
+	}
 }

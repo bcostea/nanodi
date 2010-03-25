@@ -1,38 +1,29 @@
-﻿/** 
- * This File is part of the NDI Library
- * Copyright 2009,2010 Bogdan COSTEA <bogdan.costea@gridpulse.com>
- * 
- * This library is free software, published under the terms of the LGPL version 2.1 or newer.
- * More info in the LICENSE.TXT file in the root of the project.
- * 
- */
-
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Ndi.Tooling.Logging;
-using Ndi.Attributes;
 
 namespace Ndi.Component.Locator
 {
 	class XmlLocator : ILocator
 	{
-		static readonly ILogger Log = LogFactory.GetLog(typeof(XmlLocator));
+		static ILogger log = LogFactory.GetLog(typeof(XmlLocator));
 
-		
+		public static readonly string DEFAULT_CONTEXT_FILE_NAME = @"components.xml";
 
 		public List<IComponent> Locate()
 		{
-			return Locate(AbstractApplicationContext.DEFAULT_CONTEXT_FILE_NAME);
+			return Locate(DEFAULT_CONTEXT_FILE_NAME);
 		}
 
 		public List<IComponent> Locate(string xmlFile)
 		{
 			List<IComponent> components = new List<IComponent>();
 
-			if (Log.IsDebugEnabled())
+			if (log.IsDebugEnabled())
 			{
-				Log.Debug("Locating components defined in XML resource " + xmlFile);
+				log.Debug("Locating components defined in XML resource " + xmlFile);
 			}
 
 			XDocument feedXML = XDocument.Load(xmlFile);
@@ -47,7 +38,7 @@ namespace Ndi.Component.Locator
 													UtilityToolbox.GetType((string)componentElement.Attribute("Type")),
 													UtilityToolbox.GetScope((string)componentElement.Attribute("Scope")));
 
-                component.Fields = getFields(componentElement);
+				component.Fields = getFields(componentElement);
 
 				components.Add(component);
 			}
@@ -65,16 +56,9 @@ namespace Ndi.Component.Locator
 				IEnumerable<XElement> xmlFieldElements = componentElement.Descendants("field");
 				foreach (XElement fieldElement in xmlFieldElements)
 				{
-					ComponentField componentField = new ComponentField((string)fieldElement.Attribute("Name"), InjectMethod.Field);
+					ComponentField componentField = new ComponentField((string)fieldElement.Attribute("Name"));
 					fields.Add(componentField);
 				}
-
-                IEnumerable<XElement> xmlParameterElements = componentElement.Descendants("parameter");
-                foreach (XElement parameterElement in xmlParameterElements)
-                {
-                    ComponentField componentField = new ComponentField((string)parameterElement.Attribute("Name"), InjectMethod.Constructor);
-                    fields.Add(componentField);
-                }
 			}
 
 			return fields;
