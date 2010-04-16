@@ -7,16 +7,13 @@
  * 
  */
 
-using System;
-
-namespace Ndi.Exceptions
+namespace Ndi.Attributes
 {
-    [Serializable]
-    public class ComponentAlreadyExistsException : Exception
+    public enum InjectMethod
     {
-        public ComponentAlreadyExistsException(string componentName) :
-            base("A component named [" + componentName + "] is already declared!")
-        {
-        }
+        None=0,
+        Field=1,
+        Constructor=2,
+        Setter=3
     }
 }

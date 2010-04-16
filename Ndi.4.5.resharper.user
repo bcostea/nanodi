@@ -11,8 +11,6 @@
   </NAntValidationSettings>
   <RecentFiles>
     <RecentFiles>
-      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/f:State.cs" caret="289" fromTop="7" />
-      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Logging/f:LogFactory.cs" caret="0" fromTop="0" />
       <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Logging/f:ILogger.cs" caret="0" fromTop="0" />
       <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Attributes/f:ComponentAttribute.cs" caret="291" fromTop="8" />
       <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:UtilityToolboxTest.cs" caret="209" fromTop="11" />
@@ -38,9 +36,11 @@
       <File id="FA8B7160-1801-41C3-AD5D-171579E7D91E/f:Program.cs" caret="0" fromTop="0" />
       <File id="FA8B7160-1801-41C3-AD5D-171579E7D91E/f:MainComponent.cs" caret="962" fromTop="12" />
       <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/d:ComponentActivator/f:DefaultComponentActivator.cs" caret="3439" fromTop="10" />
-      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:OSPropertyManager.cs" caret="298" fromTop="4" />
-      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:PlainTextPropertyManager.cs" caret="338" fromTop="7" />
       <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Component/f:ComponentField.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Attributes/f:InjectAttribute.cs" caret="694" fromTop="9" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:AbstractPropertyManager.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:OSPropertyManager.cs" caret="0" fromTop="0" />
+      <File id="5F35E71C-7948-42A5-A5B1-07821FE089FD/d:Tooling/d:Properties/d:PropertyManager/f:PlainTextPropertyManager.cs" caret="0" fromTop="0" />
     </RecentFiles>
     <RecentEdits>
       <File id="1981CFE1-AC62-432B-BA8D-A1BD378B6CAE/f:AppTest.cs" caret="0" fromTop="0" />
