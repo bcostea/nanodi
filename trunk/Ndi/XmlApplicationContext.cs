@@ -1,10 +1,14 @@
-﻿using System;
-using Ndi;
-using Ndi.Component.ComponentActivator;
+﻿/** 
+ * This File is part of the NDI Library
+ * Copyright 2009,2010 Bogdan COSTEA <bogdan.costea@gridpulse.com>
+ * 
+ * This library is free software, published under the terms of the LGPL version 2.1 or newer.
+ * More info in the LICENSE.TXT file in the root of the project.
+ * 
+ */
+
 using Ndi.Component.Locator;
-using Ndi.Component.Registry;
 using Ndi.Container;
-using Ndi.Exceptions;
 using Ndi.Tooling.Logging;
 
 namespace Ndi
@@ -15,6 +19,7 @@ namespace Ndi
 
 		public XmlApplicationContext(): base()
 		{
+            Initialize();
 		}
 
 		public XmlApplicationContext(string fileName)
@@ -26,7 +31,7 @@ namespace Ndi
 		{
 			if (log.IsDebugEnabled())
 			{
-				log.Debug("Initializing attribute application context.");
+				log.Info("Initializing attribute application context.");
 			}
 
 			beforeInitialize();
@@ -47,5 +52,10 @@ namespace Ndi
 				container.Initialize(fileName);
 			}
 		}
-	}
+
+        public override void Initialize()
+        {
+           
+        }
+    }
 }

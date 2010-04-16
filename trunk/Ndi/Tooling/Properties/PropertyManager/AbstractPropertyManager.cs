@@ -7,13 +7,14 @@
  * 
  */
 
-namespace Ndi
+namespace Ndi.Tooling.Properties.PropertyManager
 {
-	public interface IApplicationContext:ILifecycle 
+	public abstract class AbstractPropertyManager:IPropertyManager
 	{
-		void Initialize(string initializationParameter);
-		object GetComponent(string componentName);
 
-		Lifecycle Lifecycle { get; }
+		public abstract string GetProperty(string propertyName);
+
+		public bool OSOverridesCustom { get; set; }
+
 	}
 }

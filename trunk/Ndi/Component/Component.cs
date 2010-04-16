@@ -1,25 +1,11 @@
-﻿#region Copyright 2009 Bogdan COSTEA
-/** This File is part of the NanoDI Library
- *
- * Copyright 2009 Bogdan COSTEA
- * All rights reserved
+﻿/** 
+ * This File is part of the NDI Library
+ * Copyright 2009,2010 Bogdan COSTEA <bogdan.costea@gridpulse.com>
  * 
- * This library is free software; you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published
- * by the Free Software Foundation; either version 2.1 of the License, or
- * (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
- * or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this library; if not, write to the
- * Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor Boston, MA  02110-1301 USA
+ * This library is free software, published under the terms of the LGPL version 2.1 or newer.
+ * More info in the LICENSE.TXT file in the root of the project.
+ * 
  */
-#endregion
 
 using System;
 using System.Collections.Generic;
@@ -29,32 +15,29 @@ namespace Ndi.Component
 {
 	class Component : IComponent
 	{
-		Type type;
-		Scope scope;
-		string name;
-
-		List<ComponentField> fields = new List<ComponentField>();
+	    List<ComponentField> fields = new List<ComponentField>();
 
 		public Component(string name, Type type, Scope scope, List<ComponentField> fields)
 		{
-			this.name = name;
-			this.type = type;
-			this.scope = scope;
+			Name = name;
+			Type = type;
+			Scope = scope;
 			this.fields = fields;
 		}
 
 		public Component(string name, Type type, Scope scope)
 		{
-			this.name = name;
-			this.type = type;
-			this.scope = scope;
+			Name = name;
+			Type = type;
+			Scope = scope;
 		}
 
-		public string Name { get { return name; } }
-		public Type Type { get { return type; } }
-		public Scope Scope { get { return scope; } }
+	    public string Name { get; private set; }
+	    public Type Type { get; private set; }
+	    public Scope Scope { get; private set; }
 
-		public List<ComponentField> Fields { get { return fields; } set { fields = value; } }
+	    public List<ComponentField> Fields { get { return fields; } set { fields = value; } }
 
-	}
+
+    }
 }
