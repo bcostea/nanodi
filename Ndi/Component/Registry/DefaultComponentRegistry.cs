@@ -63,7 +63,10 @@ namespace Ndi.Component.Registry
                 log.Debug("Trying to register component '" + name + "'");
 
             if (!registeredComponents.ContainsKey(name))
+            {
+                validateComponent(component);
                 registeredComponents.Add(name, component);
+            }
             else
                 throw new ComponentAlreadyExistsException(name);
         }
@@ -100,8 +103,11 @@ namespace Ndi.Component.Registry
 		{
 			if (component != null)
 			{
-				if (component.Name == null || component.Name.Length < 1 || component.Type == null)
-					throw new CompositionException();
+				if (component.Name == null || component.Name.Length < 1)
+					throw new CompositionException( "Invalid component" );
+
+                if(component.Type == null)
+                    throw  new CompositionException( "Invalid type for component '" + component.Name + "'");
 			}
 		}
 
