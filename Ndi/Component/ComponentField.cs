@@ -10,6 +10,9 @@ using Ndi.Attributes;
 
 namespace Ndi.Component
 {
+    /// <summary>
+    /// Represents 
+    /// </summary>
 	public class ComponentField
 	{
 	    public ComponentField(string name, InjectMethod injectMethod)
@@ -19,6 +22,7 @@ namespace Ndi.Component
         }
 
 	    public string Name { get; private set; }
+        public string Value { get; set; }
 
 	    public InjectMethod InjectMethod { get; private set; }
     }

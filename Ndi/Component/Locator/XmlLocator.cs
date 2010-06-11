@@ -73,6 +73,13 @@ namespace Ndi.Component.Locator
                 foreach (XElement parameterElement in xmlParameterElements)
                 {
                     ComponentField componentField = new ComponentField((string)parameterElement.Attribute("Name"), InjectMethod.Constructor);
+
+                    string value = (string) parameterElement.Attribute("Value");
+                    if (value!=null)
+                    {
+                        componentField.Value = value;
+                    }
+                    
                     fields.Add(componentField);
                 }
 			}
