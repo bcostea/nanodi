@@ -14,6 +14,10 @@ using Ndi.Attributes;
 
 namespace Ndi.Component.Cache
 {
+    /// <summary>
+    /// The default component cache.
+    /// All instantiated components that have a Singleton Scope are placed in the component cache for retrieval.
+    /// </summary>
     class DefaultComponentCache:IComponentCache
     {
         Dictionary<IComponent, object> cache = new Dictionary<IComponent, object>();
