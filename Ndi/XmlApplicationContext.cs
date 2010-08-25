@@ -13,6 +13,9 @@ using Ndi.Tooling.Logging;
 
 namespace Ndi
 {
+    /// <summary>
+    /// An application context that is configured using an XML configuration file
+    /// </summary>
 	public class XmlApplicationContext : AbstractApplicationContext
 	{
 		static ILogger log = LogFactory.GetLog(typeof(XmlApplicationContext));

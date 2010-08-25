@@ -41,7 +41,11 @@ namespace Ndi
             return debugCheckHelper == 1;
         }
 
-
+        /// <summary>
+        /// Utility method that returns a type by type name
+        /// </summary>
+        /// <param name="typeName">The fully qualified name of the type that is required</param>
+        /// <returns>Type</returns>
         public static Type GetType(string typeName)
         {
             Type type = null;
@@ -54,7 +58,12 @@ namespace Ndi
             }
             return type;
         }
-
+        
+        /// <summary>
+        /// Utility method that returns a scope by scope name
+        /// </summary>
+        /// <param name="scopeName">The name of the scope, one of [Singleton, Prototype]</param>
+        /// <returns>the scope, defaults to Scope.Singleton</returns>
         public static Scope GetScope(string scopeName)
         {
             Scope scope = Scope.Singleton;
@@ -63,7 +72,7 @@ namespace Ndi
             {
                 try
                 {
-                    return (Scope)Enum.Parse(typeof(Scope), scopeName, true);
+                    return (Scope) Enum.Parse(typeof(Scope), scopeName, true);
                 }
                 catch (Exception e)
                 {

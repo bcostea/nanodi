@@ -11,6 +11,9 @@ using Ndi.Container;
 
 namespace Ndi
 {
+    /// <summary>
+    /// Application context abstract base
+    /// </summary>
 	public abstract class AbstractApplicationContext : IApplicationContext
     {
 

@@ -34,6 +34,9 @@ namespace Ndi.Component.Registry
             registerDependenciesForComponents(components);
         }
 
+        /// <summary>
+        /// Unregisters all components and clears the dependency graph
+        /// </summary>
         public void UnregisterAll()
         {
             if (log.IsDebugEnabled())
@@ -43,12 +46,20 @@ namespace Ndi.Component.Registry
             dependencyGraph.Clear();
         }
 
+        /// <summary>
+        /// Initialized the dependency graph for a list of components
+        /// </summary>
+        /// <param name="components"></param>
         void initializeDependencyGraph(List<IComponent> components)
         {
             if (dependencyGraph == null)
                 dependencyGraph = new DependencyGraph(components.Count);
         }
 
+        /// <summary>
+        /// Registeres a list of components in the registry
+        /// </summary>
+        /// <param name="components">the list of components to be registered</param>
         void registerComponents(List<IComponent> components)
         {
             foreach (IComponent component in components)
@@ -56,7 +67,11 @@ namespace Ndi.Component.Registry
                 registerComponent(component.Name, component);
             }
         }
-
+        /// <summary>
+        /// Registers a component
+        /// </summary>
+        /// <param name="name">the component name</param>
+        /// <param name="component">the component definition</param>
         void registerComponent(string name, IComponent component)
         {
             if (log.IsDebugEnabled())
@@ -71,6 +86,10 @@ namespace Ndi.Component.Registry
                 throw new ComponentAlreadyExistsException(name);
         }
 
+        /// <summary>
+        /// registers all component dependencies
+        /// </summary>
+        /// <param name="components">the list components</param>
         void registerDependenciesForComponents(List<IComponent> components)
         {
             foreach (IComponent component in components)
@@ -80,6 +99,10 @@ namespace Ndi.Component.Registry
             }
         }
 
+        /// <summary>
+        /// Extracts the component dependencies based on component fields and adds them to the registry
+        /// </summary>
+        /// <param name="component"></param>
         void extractAndAddDependencies(IComponent component)
         {
 			foreach (ComponentField componentField in component.Fields)
@@ -90,6 +113,12 @@ namespace Ndi.Component.Registry
 			}
         }
 
+        /// <summary>
+        /// Retrieves a component field based on field name
+        /// </summary>
+        /// <param name="component">the component that contains the field</param>
+        /// <param name="fieldName">the field name</param>
+        /// <returns></returns>
         private FieldInfo getDependencyField(IComponent component, string fieldName)
         {
             FieldInfo field = component.Type.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Instance);
@@ -99,6 +128,11 @@ namespace Ndi.Component.Registry
                 throw new CompositionException("Component '" + component.Name + "' does not contain field '" + fieldName + "'");
         }
 
+        /// <summary>
+        /// Validates a component.
+        /// Checks for component name and component Type.
+        /// </summary>
+        /// <param name="component">the component definition</param>
         void validateComponent(IComponent component)
 		{
 			if (component != null)
@@ -111,6 +145,12 @@ namespace Ndi.Component.Registry
 			}
 		}
 
+        /// <summary>
+        /// Adds a component dependency to the registry also checking for validity.
+        /// The component is set as a dependency in the dependency graph.
+        /// </summary>
+        /// <param name="parentComponent"></param>
+        /// <param name="fieldInfo"></param>
         void addComponentDependencyIfValid(IComponent parentComponent, FieldInfo fieldInfo)
         {
             if (fieldIsValidComponent(fieldInfo))
@@ -125,7 +165,12 @@ namespace Ndi.Component.Registry
         }
 
        
-
+        /// <summary>
+        /// Checks if a component field is a valid component.
+        /// This is required to ensure that all fields that are dependencies match the correct definition
+        /// </summary>
+        /// <param name="fieldInfo"></param>
+        /// <returns></returns>
         Boolean fieldIsValidComponent(FieldInfo fieldInfo)
         {
             if(log.IsDebugEnabled())
@@ -136,12 +181,23 @@ namespace Ndi.Component.Registry
                     componentHasSameType(registeredComponents[fieldInfo.Name], fieldInfo.FieldType));
         }
 
+        /// <summary>
+        /// Checks if a component dependency has the correct type
+        /// </summary>
+        /// <param name="iComponent">the component definition</param>
+        /// <param name="type">the dependency type</param>
+        /// <returns></returns>
         private bool componentHasSameType(IComponent iComponent, Type type)
         {
             return type.Equals(iComponent.Type);    
         }
 
-
+        /// <summary>
+        /// Checks if a component implements the correct interface, to ensure correct injection
+        /// </summary>
+        /// <param name="component">the component definition</param>
+        /// <param name="theInterface">the interface type of the dependency</param>
+        /// <returns>true if it implements the correct interface</returns>
         Boolean componentHasInterface(IComponent component, Type theInterface)
         {
             
@@ -185,6 +241,11 @@ namespace Ndi.Component.Registry
             return registeredComponents.ContainsKey(componentName);
         }
 
+        /// <summary>
+        /// Retrieves the component definition from the registry 
+        /// </summary>
+        /// <param name="componentName">the component name</param>
+        /// <returns>the component definition</returns>
         public IComponent GetComponent(string componentName)
         {
             if (ContainsComponent(componentName))

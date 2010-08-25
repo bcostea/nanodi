@@ -12,7 +12,9 @@ using System;
 [assembly: CLSCompliant(true)]
 namespace Ndi
 {
-
+    /// <summary>
+    /// Utility class, singleton that contains the initialised application context
+    /// </summary>
 	public class App
 	{
 

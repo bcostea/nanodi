@@ -18,6 +18,10 @@ using Ndi.Exceptions;
 
 namespace Ndi.Component.ComponentActivator
 {
+    /// <summary>
+    /// The instance creator.
+    /// Requires a component registry and a component cache
+    /// </summary>
     class DefaultComponentActivator : IComponentActivator
     {
         private IComponentRegistry componentRegistry;

@@ -13,6 +13,9 @@ using Ndi.Tooling.Logging;
 
 namespace Ndi
 {
+    /// <summary>
+    /// An application context that is configured using Attributes
+    /// </summary>
 	public class AttributeApplicationContext : AbstractApplicationContext
 	{
 		static ILogger log = LogFactory.GetLog(typeof(AttributeApplicationContext));
