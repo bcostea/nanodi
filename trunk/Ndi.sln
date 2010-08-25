@@ -10,12 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.Samples.Console", "Ndi.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.Tests", "Ndi.Tests\Ndi.Tests.csproj", "{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.RichClient", "Ndi.RichClient\Ndi.RichClient.csproj", "{0A7507FF-9E63-4174-96A2-8A016FDC197C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.RichClient.Tests", "Ndi.RichClient.Tests\Ndi.RichClient.Tests.csproj", "{F438C8DD-8441-43CE-99E7-03F2D1BFD665}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.Samples.RichClient", "Ndi.Samples.RichClient\Ndi.Samples.RichClient.csproj", "{D958A2D2-A9E5-4418-AFEA-A2FEA9D517D0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.ExtraTooling", "Ndi.ExtraTooling\Ndi.ExtraTooling.csproj", "{74059B03-16A5-4775-8235-416A68B0E2CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ndi.ExtraTooling.Tests", "Ndi.ExtraTooling.Tests\Ndi.ExtraTooling.Tests.csproj", "{E4D832B4-DF08-4932-944F-F07EDDE2800D}"
@@ -38,18 +32,6 @@ Global
 		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1981CFE1-AC62-432B-BA8D-A1BD378B6CAE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A7507FF-9E63-4174-96A2-8A016FDC197C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A7507FF-9E63-4174-96A2-8A016FDC197C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A7507FF-9E63-4174-96A2-8A016FDC197C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A7507FF-9E63-4174-96A2-8A016FDC197C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F438C8DD-8441-43CE-99E7-03F2D1BFD665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F438C8DD-8441-43CE-99E7-03F2D1BFD665}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F438C8DD-8441-43CE-99E7-03F2D1BFD665}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F438C8DD-8441-43CE-99E7-03F2D1BFD665}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D958A2D2-A9E5-4418-AFEA-A2FEA9D517D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D958A2D2-A9E5-4418-AFEA-A2FEA9D517D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D958A2D2-A9E5-4418-AFEA-A2FEA9D517D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D958A2D2-A9E5-4418-AFEA-A2FEA9D517D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{74059B03-16A5-4775-8235-416A68B0E2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{74059B03-16A5-4775-8235-416A68B0E2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74059B03-16A5-4775-8235-416A68B0E2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
