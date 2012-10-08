@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-
-<components>
-	<component Name="singletonComponent" Type="NdiUnitTests.TestComponents.SimpleComponents.ChildSingletonComponent"/>
-	<component Name="singletonComponent" Type="NdiUnitTests.TestComponents.SimpleComponents.ChildPrototypeComponent"/>
-</components>
