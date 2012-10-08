@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<components>
+  <component Name="childComponent" Type="Ndi.UnitTests.TestComponents.ConstructorInjection.ChildComponent" Scope="Prototype"/>
+  <component Name="secondChildComponent" Type="Ndi.UnitTests.TestComponents.ConstructorInjection.ChildComponent" Scope="Prototype"/>
+
+  <component Name="parentComponentWithConstructorThatRequiresChild" Type="Ndi.UnitTests.TestComponents.ConstructorInjection.ParentComponentWithConstructorThatRequiresChild">
+    <parameter Name="childComponent" />
+  </component>
+
+  <component Name="parentComponentWithConstructorThatRequiresChildAndOtherField" Type="Ndi.UnitTests.TestComponents.ConstructorInjection.ParentComponentWithConstructorThatRequiresChildAndOtherField">
+    <parameter Name="childComponent" />
+    <field Name="secondChildComponent" />
+  </component>
+  
+</components>
