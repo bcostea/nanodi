@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bcostea/nanodi.svg?branch=master)](https://travis-ci.org/bcostea/nanodi)
+
 nanodi
 ======
 NDI is a small dependency injection container and tooling for .NET C# projects that are small or that do not need the complexity of bigger IOC solutions.
