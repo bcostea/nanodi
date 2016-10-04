@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<components>
+	<component Name="singletonComponent" Type="Ndi.UnitTests.TestComponents.SimpleComponents.ChildSingletonComponent"/>
+	<component Name="prototypeComponent" Type="Ndi.UnitTests.TestComponents.SimpleComponents.ChildPrototypeComponent" Scope="Prototype"/>
+
+	<component Name="parentComponentOne" Type="Ndi.UnitTests.TestComponents.SimpleComponents.ParentComponentOne">
+		<field Name="singletonComponent" />
+		<field Name="prototypeComponent" />
+	</component>
+
+	<component Name="parentComponentTwo" Type="Ndi.UnitTests.TestComponents.SimpleComponents.ParentComponentTwo">
+		<field Name="singletonComponent" />
+		<field Name="prototypeComponent" />
+	</component>
+</components>

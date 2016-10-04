@@ -1,0 +1,14 @@
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\circular.xml
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\components.xml
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\constructorinjection.xml
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\injectcomponentnofield.xml
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\invalidtype.xml
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\nameoverlap.xml
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\Ndi.UnitTests.dll
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\Ndi.UnitTests.pdb
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\Ndi.dll
+W:\DevAccelerator\nanodi\Ndi.UnitTests\bin\Debug\Ndi.pdb
+W:\DevAccelerator\nanodi\Ndi.UnitTests\obj\Debug\Ndi.UnitTests.csprojResolveAssemblyReference.cache
+W:\DevAccelerator\nanodi\Ndi.UnitTests\obj\Debug\Ndi.UnitTests.dll
+W:\DevAccelerator\nanodi\Ndi.UnitTests\obj\Debug\Ndi.UnitTests.pdb

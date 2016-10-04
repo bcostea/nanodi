@@ -1,0 +1,4 @@
+W:\DevAccelerator\nanodi\Ndi\bin\Debug\Ndi.dll
+W:\DevAccelerator\nanodi\Ndi\bin\Debug\Ndi.pdb
+W:\DevAccelerator\nanodi\Ndi\obj\Debug\Ndi.dll
+W:\DevAccelerator\nanodi\Ndi\obj\Debug\Ndi.pdb
