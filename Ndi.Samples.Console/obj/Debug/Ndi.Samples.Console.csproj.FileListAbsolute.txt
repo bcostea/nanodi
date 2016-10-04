@@ -1,7 +1,0 @@
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\bin\Debug\NdiExample.exe
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\bin\Debug\NdiExample.pdb
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\bin\Debug\Ndi.dll
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\bin\Debug\Ndi.pdb
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\obj\Debug\Ndi.Samples.Console.csprojResolveAssemblyReference.cache
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\obj\Debug\NdiExample.exe
-W:\DevAccelerator\nanodi\Ndi.Samples.Console\obj\Debug\NdiExample.pdb
