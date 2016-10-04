@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ndi;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 using Ndi.UnitTests.TestComponents.ConstructorInjection;
 
 namespace Ndi.UnitTests
 {
-	[TestClass]
+	
 	public class AttributeApplicationContextTest:AbstractApplicationContextTest
 	{
 
-		[TestInitialize]
-		public override void Setup()
+		public AttributeApplicationContextTest()
 		{
             applicationContext = new AttributeApplicationContext("Ndi.UnitTests.TestComponents.SimpleComponents");
 		}
 
 
-		[TestMethod]
+		[Fact]
 		public override void ApplicationContext_InitializeWithSource()
 		{
             applicationContext.Destroy();
@@ -28,7 +27,7 @@ namespace Ndi.UnitTests
 			applicationContext.Lifecycle.InitializedRequired();
 		}
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_InitializeWithNoSource()
         {
             applicationContext.Destroy();
@@ -36,33 +35,33 @@ namespace Ndi.UnitTests
             applicationContext.Lifecycle.InitializedRequired();
         }
 
-        [TestMethod]
+        [Fact]
 		public override void ApplicationContext_GetComponentCircularDependency()
 		{
             applicationContext.Destroy();
             applicationContext.Initialize("Ndi.UnitTests.TestComponents.CircularDependencies");
 		}
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_ConstructorInjectionWorks()
         {
             applicationContext.Destroy();
             applicationContext.Initialize("Ndi.UnitTests.TestComponents.ConstructorInjection");
 
-            Assert.IsNotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChild"));
+            Assert.NotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChild"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_ConstructorInjectionWorksWithAdditionalFields()
         {
             applicationContext.Destroy();
             applicationContext.Initialize("Ndi.UnitTests.TestComponents.ConstructorInjection");
 
-            Assert.IsNotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField"));
-            Assert.IsNotNull(((ParentComponentWithConstructorThatRequiresChildAndOtherField)applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField")).SecondChild);
+            Assert.NotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField"));
+            Assert.NotNull(((ParentComponentWithConstructorThatRequiresChildAndOtherField)applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField")).SecondChild);
         }
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_ComponentWithFieldRequiredInConstructor()
         {
             applicationContext.Destroy();
@@ -70,7 +69,7 @@ namespace Ndi.UnitTests
         }
 
 
-        [TestMethod]
+        [Fact]
         public override void ApplicationContext_Destroy()
         {
             applicationContext.Destroy();

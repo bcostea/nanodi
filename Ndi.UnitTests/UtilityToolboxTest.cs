@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Ndi.Attributes;
 using System;
 using System.Collections.Generic;
@@ -8,49 +8,48 @@ using System.Threading.Tasks;
 
 namespace Ndi.UnitTests
 {
-    [TestClass]
+    
     public class UtilityToolboxTest
     {
         UtilityToolbox utilityToolbox;
 
-        [TestInitialize]
-        public void SetUp()
+        public UtilityToolboxTest()
         {
             utilityToolbox = new UtilityToolbox();
         }
 
-        [TestMethod]
+        [Fact]
         public void IsDebugEnabledTest()
         {
             utilityToolbox.IsDebugEnabled();
         }
 
-        [TestMethod]
+        [Fact]
         public void GetTypeTest()
         {
             Type type = UtilityToolbox.GetType("Ndi.UnitTests.UtilityToolboxTest");
-            Assert.AreEqual(type, typeof(UtilityToolboxTest));
+            Assert.Equal(type, typeof(UtilityToolboxTest));
         }
 
-        [TestMethod]
+        [Fact]
         public void GetScope()
         {
             Scope scope = UtilityToolbox.GetScope("Prototype");
-            Assert.AreEqual(scope, Scope.Prototype);
+            Assert.Equal(scope, Scope.Prototype);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetScopeFailed()
         {
             Scope scope = UtilityToolbox.GetScope("InvalidScope");
-            Assert.AreEqual(scope, Scope.Singleton);
+            Assert.Equal(scope, Scope.Singleton);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetScopeNullFailed()
         {
             Scope scope = UtilityToolbox.GetScope(null);
-            Assert.AreEqual(scope, Scope.Singleton);
+            Assert.Equal(scope, Scope.Singleton);
         }
     }
 }

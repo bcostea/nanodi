@@ -1,45 +1,44 @@
 ﻿using System;
 using Ndi;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ndi.Exceptions;
+using Xunit;
 using Ndi.UnitTests.TestComponents;
 
 namespace NdiUnitTests
 {
-    [TestClass]
+    
     public class LifecycleTest
     {
         Lifecycle lifecycle;
 		TestLifecycleObserver lifecycleObserver;
 
-        [TestInitialize]
-        public void Setup()
+        public LifecycleTest()
         {
             lifecycle = new Lifecycle();
 			lifecycleObserver = new TestLifecycleObserver();
         }
 
-        [TestMethod]
+        [Fact]
         public void Lifecycle_NotInitialized()
         {
             lifecycle.NotInitializedRequired();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.CompositionException))]
+        [Fact]
         public void Lifecycle_NotInitializedFailed()
         {
             lifecycle.Initialized();
-            lifecycle.NotInitializedRequired();
+            Assert.Throws<CompositionException>(()=>lifecycle.NotInitializedRequired());
         }
 
 
-        [TestMethod]
+        [Fact]
         public void Lifecycle_Initialized()
         {
             lifecycle.Initialized();
         }
 
-        [TestMethod]
+        [Fact]
         public void Lifecycle_InitializedRequired()
         {
             lifecycle.Initialized();
@@ -47,61 +46,60 @@ namespace NdiUnitTests
         }
 
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.CompositionException))]
+        [Fact]
         public void Lifecycle_InitializedRequiredFailed()
         {
-            lifecycle.InitializedRequired();
+            Assert.Throws<CompositionException>(()=>lifecycle.InitializedRequired());
         }
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleRegisterObserver()
 		{
 			lifecycle.RegisterObserver(lifecycleObserver);
 		}
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleObserverNone()
 		{
 			LifecycleRegisterObserver();
-			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.Initial);
+			Assert.Equal(lifecycleObserver.State, TestLifecycleObserver.Initial);
 		}
 
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleObserverBeforeInit()
 		{
 			LifecycleRegisterObserver();
 			lifecycle.BeforeInitialize();
-			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.BeforeInit);
+			Assert.Equal(lifecycleObserver.State, TestLifecycleObserver.BeforeInit);
 		}
 
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleObserverAfterInit()
 		{
 			LifecycleRegisterObserver();
 			lifecycle.Initialized();
-			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.AfterInit);
+			Assert.Equal(lifecycleObserver.State, TestLifecycleObserver.AfterInit);
 		}
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleObserverBeforeDestroyed()
 		{
 			LifecycleRegisterObserver();
 			lifecycle.BeforeDestroy();
-			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.BeforeDest);
+			Assert.Equal(lifecycleObserver.State, TestLifecycleObserver.BeforeDest);
 		}
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleObserverAfterDestroyed()
 		{
 			LifecycleRegisterObserver();
 			lifecycle.Destroyed();
-			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.AfterDest);
+			Assert.Equal(lifecycleObserver.State, TestLifecycleObserver.AfterDest);
 		}
 
-        [TestMethod]
+        [Fact]
 		public void LifecycleUnregisterObserver()
 		{
 			LifecycleRegisterObserver();
@@ -109,7 +107,7 @@ namespace NdiUnitTests
 
 			lifecycle.Initialized();
 
-			Assert.AreEqual(lifecycleObserver.State, TestLifecycleObserver.Initial);
+			Assert.Equal(lifecycleObserver.State, TestLifecycleObserver.Initial);
 
 		}
 

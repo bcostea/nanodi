@@ -1,14 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Xunit;
 using Ndi.UnitTests.TestComponents.SimpleComponents;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Ndi.Exceptions;
+using Assert = Xunit.Assert;
 
 namespace Ndi.UnitTests
 {
-    public abstract class AbstractApplicationContextTest
+    public abstract class AbstractApplicationContextTest : IDisposable
     {
         protected IApplicationContext applicationContext;
 
@@ -17,78 +15,75 @@ namespace Ndi.UnitTests
         IChildComponent childComponentPrototype;
 
 
-        abstract public void Setup();
-
         public abstract void ApplicationContext_Destroy();
         public abstract void ApplicationContext_InitializeWithSource();
         public abstract void ApplicationContext_GetComponentCircularDependency();
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.CompositionException))]
+        [Fact]
         public void ApplicationContext_GetComponentFailed()
         {
             applicationContext.Destroy();
-            applicationContext.GetComponent("parentComponentOne");
+            Assert.Throws<CompositionException>(()=> applicationContext.GetComponent("parentComponentOne"));
         }
 
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_GetComponent()
         {
             parentComponentOne = (IParentComponent)applicationContext.GetComponent("parentComponentOne");
-            Assert.IsNotNull(parentComponentOne);
+            Assert.NotNull(parentComponentOne);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_GetSubComponent()
         {
             parentComponentOne = (IParentComponent)applicationContext.GetComponent("parentComponentOne");
-            Assert.IsNotNull(parentComponentOne.SingletonContent);
+            Assert.NotNull(parentComponentOne.SingletonContent);
         }
 
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_GetComponentSingleton()
         {
             childComponentSingleton = (IChildComponent)applicationContext.GetComponent("singletonComponent");
-            Assert.IsNotNull(childComponentSingleton);
+            Assert.NotNull(childComponentSingleton);
         }
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_GetComponentSingletonIsSingleton()
         {
             childComponentSingleton = (IChildComponent)applicationContext.GetComponent("singletonComponent");
             IChildComponent sameObject = (IChildComponent)applicationContext.GetComponent("singletonComponent");
 
-            Assert.AreSame(childComponentSingleton, sameObject);
+            Assert.Same(childComponentSingleton, sameObject);
         }
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_GetComponentProtoype()
         {
             childComponentPrototype = (IChildComponent)applicationContext.GetComponent("prototypeComponent");
-            Assert.IsNotNull(childComponentPrototype);
+            Assert.NotNull(childComponentPrototype);
         }
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_GetComponentProtoypeIsPrototype()
         {
             childComponentPrototype = (IChildComponent)applicationContext.GetComponent("prototypeComponent");
             IChildComponent otherObject = (IChildComponent)applicationContext.GetComponent("prototypeComponent");
 
-            Assert.AreNotSame(childComponentPrototype, otherObject);
+            Assert.NotSame(childComponentPrototype, otherObject);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.InvalidComponentException))]
+        [Fact]
         public void ApplicationContext_GetComponentInvalid()
         {
-            parentComponentOne = (IParentComponent)applicationContext.GetComponent("invalidComponent");
+            Assert.Throws<InvalidComponentException>(() => applicationContext.GetComponent("invalidComponent"));
+
+            ;
         }
 
-        [TestCleanup]
-        public void Teardown()
+        public void Dispose()
         {
             applicationContext.Destroy();
         }

@@ -1,62 +1,61 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Ndi;
+using Ndi.Exceptions;
 
 namespace Ndi.UnitTests
 {
-    [TestClass]
+    
     public class XmlApplicationContextTest : AbstractApplicationContextTest
     {
-        [TestInitialize]
-        public override void Setup()
+        public  XmlApplicationContextTest()
         {
             applicationContext = new XmlApplicationContext("components.xml");
         }
 
-        [TestMethod]
+        [Fact]
         public override void ApplicationContext_InitializeWithSource()
         {
             applicationContext.Lifecycle.InitializedRequired();
         }
 
-        [TestMethod]
+        [Fact]
         public override void ApplicationContext_GetComponentCircularDependency()
         {
             applicationContext.Destroy();
             applicationContext.Initialize("circular.xml");
         }
 
-        [TestMethod]
+        [Fact]
         public void XmlApplicationContextWithFile()
         {
             applicationContext.Destroy();
             applicationContext.Initialize("circular.xml");
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.ComponentAlreadyExistsException))]
+        [Fact]
         public void ApplicationContextNameOverlap()
         {
             applicationContext.Destroy();
-            applicationContext.Initialize("nameoverlap.xml");
+            Assert.Throws<ComponentAlreadyExistsException>(() => applicationContext.Initialize("nameoverlap.xml"));
+
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.CompositionException))]
+        [Fact]
         public void ApplicationContextInvalidType()
         {
             applicationContext.Destroy();
-            applicationContext.Initialize("invalidtype.xml");
+            Assert.Throws<CompositionException>(() => applicationContext.Initialize("invalidtype.xml"));
+
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Ndi.Exceptions.CompositionException))]
+        [Fact]
         public void ApplicationContextInvalidFieldForComponent()
         {
             applicationContext.Destroy();
-            applicationContext.Initialize("injectcomponentnofield.xml");
+            Assert.Throws<CompositionException>(()=>applicationContext.Initialize("injectcomponentnofield.xml"));
         }
 
-        [TestMethod]
+        [Fact]
         public override void ApplicationContext_Destroy()
         {
             applicationContext.Destroy();

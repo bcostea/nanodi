@@ -1,30 +1,30 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Xunit;
 using Ndi;
 using Ndi.UnitTests.TestComponents.ConstructorInjection;
 
 
 namespace Ndi.UnitTests
 {
-    [TestClass]
+    
     public class XmlApplicationContextConstructorInjectionTests
     {
         protected IApplicationContext applicationContext;
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_ConstructorInjectionWorks()
         {
             applicationContext = new XmlApplicationContext("constructorinjection.xml");
 
-            Assert.IsNotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChild"));
+            Assert.NotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChild"));
         }
 
-        [TestMethod]
+        [Fact]
         public void ApplicationContext_ConstructorInjectionWorksWithAdditionalFields()
         {
             applicationContext = new XmlApplicationContext("constructorinjection.xml");
 
-            Assert.IsNotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField"));
-            Assert.IsNotNull(((ParentComponentWithConstructorThatRequiresChildAndOtherField)applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField")).SecondChild);
+            Assert.NotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField"));
+            Assert.NotNull(((ParentComponentWithConstructorThatRequiresChildAndOtherField)applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildAndOtherField")).SecondChild);
         }
     }
 }
