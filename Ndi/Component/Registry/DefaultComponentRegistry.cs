@@ -10,6 +10,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Ndi.Attributes;
 using Ndi.Exceptions;
 using Ndi.Component.Dependency;
 using Ndi.Tooling.Logging;
@@ -107,9 +108,12 @@ namespace Ndi.Component.Registry
         {
 			foreach (ComponentField componentField in component.Fields)
 			{
-				FieldInfo possibleDependencyField = getDependencyField(component, componentField.Name);
-				
-                addComponentDependencyIfValid(component, possibleDependencyField);
+                // Constructor injection doesn't require an existing field so we just skip this
+			    if (componentField.InjectMethod != InjectMethod.Constructor)
+			    {
+			        FieldInfo possibleDependencyField = getDependencyField(component, componentField.Name);
+			        addComponentDependencyIfValid(component, possibleDependencyField);
+			    }
 			}
         }
 

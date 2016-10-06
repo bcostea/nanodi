@@ -60,6 +60,7 @@
     <Compile Include="TestComponents\ConstructorInjection\ChildComponent.cs" />
     <Compile Include="TestComponents\ConstructorInjection\ParentComponentWithConstructorThatRequiresChild.cs" />
     <Compile Include="TestComponents\ConstructorInjection\ParentComponentWithConstructorThatRequiresChildAndOtherField.cs" />
+    <Compile Include="TestComponents\ConstructorInjection\ParentComponentWithConstructorThatRequiresChildWithNoField.cs" />
     <Compile Include="TestComponents\ConstructorInjection\SecondChildComponent.cs" />
     <Compile Include="TestComponents\FieldRequiredInConstructor\ComponentRequiredByConstructor.cs" />
     <Compile Include="TestComponents\FieldRequiredInConstructor\ComponentWithFieldRequiredInConstructor.cs" />

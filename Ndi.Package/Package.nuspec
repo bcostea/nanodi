@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Ndi</id>
-    <version>0.1.1.0</version>
+    <version>0.1.2.0</version>
     <authors>Bogdan Costea</authors>
     <owners>Bogdan Costea</owners>
     <licenseUrl>https://raw.githubusercontent.com/bcostea/nanodi/master/LICENSE.txt</licenseUrl>

@@ -52,6 +52,15 @@ namespace Ndi.UnitTests
         }
 
         [Fact]
+        public void ApplicationContext_ConstructorInjectionWorks_NoField()
+        {
+            applicationContext.Destroy();
+            applicationContext.Initialize("Ndi.UnitTests.TestComponents.ConstructorInjection");
+
+            Assert.NotNull(applicationContext.GetComponent("parentComponentWithConstructorThatRequiresChildWithNoField"));
+        }
+
+        [Fact]
         public void ApplicationContext_ConstructorInjectionWorksWithAdditionalFields()
         {
             applicationContext.Destroy();
