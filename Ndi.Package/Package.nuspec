@@ -1,20 +1,17 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Package</id>
-    <version>0.0.1</version>
+    <id>Ndi</id>
+    <version>0.1.1.0</version>
     <authors>Bogdan Costea</authors>
     <owners>Bogdan Costea</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <licenseUrl>https://raw.githubusercontent.com/bcostea/nanodi/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/bcostea/nanodi/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
-    <copyright>Copyright 2016</copyright>
-    <tags>Tag1 Tag2</tags>
-    <dependencies>
-      <dependency id="SampleDependency" version="1.0" />
-    </dependencies>
+    <language>en-US</language>
+    <description>NDI is a small dependency injection container for .NET C# projects that are small or that do not need the complexity of bigger IOC solutions.</description>
+    <releaseNotes>Cleaned up, moved to 45, added nuget.</releaseNotes>
+    <copyright>Copyright 2009-2016 Bogdan Costea</copyright>
+    <tags>Dependency Injection,IoC,DI,container,inversion,control</tags>
   </metadata>
 </package>
