@@ -4,7 +4,7 @@ using Ndi.Exceptions;
 using Xunit;
 using Ndi.UnitTests.TestComponents;
 
-namespace NdiUnitTests
+namespace Ndi.UnitTests
 {
     
     public class LifecycleTest
