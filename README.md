@@ -1,19 +1,20 @@
 [![Build Status](https://travis-ci.org/bcostea/nanodi.svg?branch=master)](https://travis-ci.org/bcostea/nanodi)
+[![NuGet](https://img.shields.io/nuget/v/Ndi.svg)](https://www.nuget.org/packages/Ndi)
 
 nanodi
 ======
-NDI is a small dependency injection container and tooling for .NET C# projects that are small or that do not need the complexity of bigger IOC solutions.
+Ndi is a small dependency injection container and tooling for .NET C# projects that are small or that do not need the complexity of bigger IOC solutions.
 
-I built NDI back in 2009 as a pet project, learning .net.
+I built NDI back in 2009 as a pet project, learning .net, I'm reviving and enhancing it for current projects.
 
-NDI's goal is to be small, fast and clean.
+Ndi's goal is to be small, fast and clean.
 
-NDI contains:
+Ndi contains:
 
 * DI container
-* micro-tooling (configuration holder, i18n) 
+* micro-tooling (configuration holder, logging) 
 
-NDI capabilities as a DI container:
+Ndi capabilities as a DI container:
 
 * Attributes based component configuration
 * XML based component based configuration
