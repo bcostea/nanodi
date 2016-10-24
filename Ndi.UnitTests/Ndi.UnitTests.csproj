@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AbstractApplicationContextTest.cs" />
     <Compile Include="AttributeApplicationContextTest.cs" />
+    <Compile Include="InjectByTypeNotNameTest.cs" />
     <Compile Include="LifecycleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestComponents\CircularDependencies\DependencyOne.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="TestComponents\ConstructorInjection\SecondChildComponent.cs" />
     <Compile Include="TestComponents\FieldRequiredInConstructor\ComponentRequiredByConstructor.cs" />
     <Compile Include="TestComponents\FieldRequiredInConstructor\ComponentWithFieldRequiredInConstructor.cs" />
+    <Compile Include="TestComponents\InjectByType\Child.cs" />
+    <Compile Include="TestComponents\InjectByType\Parent.cs" />
     <Compile Include="TestComponents\SimpleComponents\ChildComponent.cs" />
     <Compile Include="TestComponents\SimpleComponents\ChildPrototypeComponent.cs" />
     <Compile Include="TestComponents\SimpleComponents\ChildSingletonComponent.cs" />
@@ -105,6 +108,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

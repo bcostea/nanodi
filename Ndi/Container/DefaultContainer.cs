@@ -55,7 +55,13 @@ namespace Ndi.Container
 				return componentActivator.GetInstance(component);
 		}
 
-		public IMutableContainer AddComponent(string name, object component)
+        public object GetComponent(string componentName, Type componentType)
+        {
+            IComponent component = componentRegistry.GetComponent(componentName, componentType);
+            return componentActivator.GetInstance(component);
+        }
+
+        public IMutableContainer AddComponent(string name, object component)
 		{
 			throw new NotImplementedException();
 		}

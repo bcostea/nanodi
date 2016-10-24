@@ -16,7 +16,17 @@ namespace Ndi.Component.Registry
     {
         
         Boolean ContainsComponent(string componentName);
+        /**
+         * Get a configured component by name
+         **/
         IComponent GetComponent(string componentName);
+
+        /**
+         * Get a configured component by name, use type as a fallback.
+         * If there's only one component of a specific type, provide that one, regardless of the name.
+         **/
+        IComponent GetComponent(string componentName, Type componentType);
+
         void RegisterAll(List<IComponent> components);
 
         List<IComponent> GetComponentDependencies(IComponent component);

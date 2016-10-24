@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using Ndi.Attributes;
@@ -245,6 +246,25 @@ namespace Ndi.Component.Registry
             return registeredComponents.ContainsKey(componentName);
         }
 
+        public bool ContainsType(Type componentType)
+        {
+            return GetComponentsByType(componentType).Count > 0;
+        }
+
+        public List<IComponent> GetComponentsByType(Type componentType)
+        {
+            List<IComponent> components = new List<IComponent>();
+
+            foreach (IComponent component in registeredComponents.Values)
+            {
+                if (component.Type == componentType)
+                {
+                    components.Add(component);
+                }
+            }
+            return components;
+        }
+
         /// <summary>
         /// Retrieves the component definition from the registry 
         /// </summary>
@@ -256,6 +276,23 @@ namespace Ndi.Component.Registry
                 return registeredComponents[componentName];
             else
                 throw new InvalidComponentException(componentName);
+        }
+
+        public IComponent GetComponent(string componentName, Type componentType)
+        {
+            if (ContainsComponent(componentName))
+                return registeredComponents[componentName];
+
+            if (ContainsType(componentType))
+            {
+                List<IComponent> components = GetComponentsByType(componentType);
+                if (components.Count == 1)
+                {
+                    return GetComponentsByType(componentType)[0];
+                }
+            }
+            throw new InvalidComponentException(componentName);
+
         }
     }
 }

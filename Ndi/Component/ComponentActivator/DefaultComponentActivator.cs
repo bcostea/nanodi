@@ -112,7 +112,8 @@ namespace Ndi.Component.ComponentActivator
             List<object> parameters = new List<object>();
             foreach (ParameterInfo paramInfo in ctrInfo.GetParameters())
             {
-                parameters.Add(GetInstance(componentRegistry.GetComponent(paramInfo.Name)));
+                
+                parameters.Add(GetInstance(componentRegistry.GetComponent(paramInfo.Name, paramInfo.ParameterType)));
             }
             return parameters.ToArray();
         }
