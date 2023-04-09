@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/bcostea/nanodi.svg?branch=master)](https://travis-ci.org/bcostea/nanodi)
 [![NuGet](https://img.shields.io/nuget/v/Ndi.svg)](https://www.nuget.org/packages/Ndi)
 
 nanodi
